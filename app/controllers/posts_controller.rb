@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!
+	before_action :user_is_author, only: [:edit, :update, :destroy]
+	before_action :commitment_taken, only: [:new, :create]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_forum, only: [:create, :edit, :update, :destroy]
 
@@ -64,5 +67,21 @@ class PostsController < ApplicationController
   def set_forum
     @forum = Forum.find(params[:forum_id])
   end
+
+	def user_is_author 
+		@post = set_post
+		if (current_user != @post.user || current_user.role == 'moderator')
+			flash[:error] = "Vous n'êtes pas l'auteur de ce Post, vous n'avez pas l'autorisation pour effectuer cette action."
+			redirect_to home_path
+		end
+	end
+
+	def commitment_taken
+		@forum = set_forum
+		if @forum.commitment && !(current_user.commitments.include?(@forum.commitment))
+			flash[:error] = "Vous devez avoir rejoint le Mouvement \"#{@forum.commitment.title}\" pour créer un Post sur le Forum qui lui est dédié."
+			redirect_to commitments_path 
+		end
+	end
   
 end
