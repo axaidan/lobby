@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :user_is_author, only: [:edit, :update, :destroy]
 	before_action :commitment_taken, only: [:new, :create]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -69,7 +70,7 @@ class PostsController < ApplicationController
 
 	def user_is_author 
 		@post = set_post
-		if (current_user != @post.user)
+		if (current_user != @post.user || current_user.role == 'moderator')
 			flash[:error] = "Vous n'êtes pas l'auteur de ce Post, vous n'avez pas l'autorisation pour effectuer cette action."
 			redirect_to home_path
 		end
