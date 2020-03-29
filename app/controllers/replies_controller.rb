@@ -1,7 +1,7 @@
 class RepliesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :user_is_author, only: [:edit, :update, :destroy]
-	before_action :commmitment_taken, only: [:new, :create]
+	before_action :commitment_taken, only: [:new, :create]
   before_action :set_post, only: [:create, :update, :destroy]
   before_action :set_reply, only: [:edit, :update, :destroy]
 
