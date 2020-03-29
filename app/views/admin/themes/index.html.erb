@@ -8,24 +8,24 @@
       </div>
     <% else %>
       <div class="table-responsive mt-4">
-        <table class="table table-striped" >
+        <table class="table table-striped">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>TITRE </th>
-              <th>UTILISATEURS</th>
-            </tr>
+          <tr>
+            <th>ID</th>
+            <th>TITRE</th>
+            <th>UTILISATEURS</th>
+          </tr>
           </thead>
           <tbody>
-            <% @themes.each do |each_theme| %>
-              <tr id = '<%= each_theme.id %>' >
-                <td ><%= each_theme.id %></td>
-                <td ><%= each_theme.title %></td>
-                <td><%= each_theme.users.count %></td>
-                <td ><%= link_to 'Editer', edit_admin_theme_path(each_theme.id), class: 'btn btn-outline-secondary' %></td>
-                <td ><%= link_to 'Supprimer', admin_theme_path(each_theme.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %></td>
-              </tr>
-            <% end %>
+          <% @themes.each do |each_theme| %>
+            <tr id='<%= each_theme.id %>'>
+              <td><%= each_theme.id %></td>
+              <td><%= each_theme.title %></td>
+              <td><%= each_theme.users.count %></td>
+              <td><%= link_to 'Editer', edit_admin_theme_path(each_theme.id), class: 'btn btn-outline-secondary' %></td>
+              <td><%= link_to 'Supprimer', admin_theme_path(each_theme.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %></td>
+            </tr>
+          <% end %>
           </tbody>
         </table>
       </div>

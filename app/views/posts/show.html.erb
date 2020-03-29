@@ -1,125 +1,115 @@
-<div class="container my-5"> 
+<div class="container my-5">
+  <!-- RULES ALERTS -->
+  <!-- IF NOT LOGGED, MUST SIGNIN OR SIGNUP TO USE FORUM ALERT -->
+  <% if !(user_signed_in?) %>
+    <div class="alert alert-danger aler-dismissible fade show m-0 mb-4">
+      Pour répondre à ce post vous devez vous <%= link_to 'Connecter', new_user_session_path %> ou
+      vous <%= link_to 'Inscrire', new_user_registration_path %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <!-- IF LOGGED, MUST HAVE TAKEN THE COMMITMENT TO USE FORUM ALERT -->
+    <% if (@post.forum.commitment != nil) && (current_user.commitments.include?(@post.forum.commitment) == false) %>
+      <div class="alert alert-danger alert-dismissible fade show m-0 mb-4">
+        Pour répondre à ce Post, vous devez
+        <%= link_to "rejoindre le Mouvement #{@post.forum.commitment.title}", commitment_path(@post.forum.commitment) %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
+  <!-- BREADCRUMB -->
+  <% if @post.forum.commitment %>
+    <h4 class="mt-4"><%= link_to "Forums", forums_path %>
+      / <%= link_to @post.forum.commitment.title, forum_path(@post.forum.id) %>
+      / <%= link_to @post.title, forum_post_path(@post.id) %></h4>
+  <% else %>
+    <h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to "Général", forum_path(@post.forum.id) %>
+      / <%= link_to @post.title, forum_post_path(@post.id) %></h4>
+  <% end %>
+  <!-- POST -->
+  <h4 class="text-right">Post</h4>
+  <h4><%= @post.title %></h4>
+  <div class="row border mb-3 align-items-center">
+    <!-- POST INFOS -->
+    <div class="col-md-4 p-3 border-right bg-secondary">
+      <h5>par <%= @post.user.username %>
+        <% if @post.user.role != nil %>
+          (<%= @post.user.role %>)
+        <% end %>
+      </h5>
+      <small class="text-muted">créé le <%= @post.created_at.to_formatted_s(:long) %></small><br/>
+      <small class="text-muted">édité le <%= @post.updated_at.to_formatted_s(:long) %></small>
+      <!-- IF USER LOGGED -->
+      <% if user_signed_in? %>
+        <!-- CAN DELETE IF AUTHOR OR MODERATOR -->
+        <% if current_user == @post.user || current_user.role == "moderator" %>
+          <%= link_to 'Supprimer', forum_post_path(@post.forum, @post), class: 'btn btn-outline-secondary  mt-3', method: 'delete', data: {confirm: 'Êtes-vous sûr ?'} %>
+        <% end %>
+        <!-- CAN EDIT IF AUTHOR -->
+        <% if current_user == @post.user %>
+          <%= link_to 'Éditer', edit_forum_post_path(@post.forum, @post), class: 'btn  btnlinkoutline btn-outline-primary' %>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- POST CONTENT -->
+    <div class="col-md-8 p-3">
+      <%= @post.content %>
+    </div>
+  </div>
+  <!-- REPLIES -->
+  <div class="container p-0 mt-3">
+    <h4 class="mt-4 text-right">Réponses</h4>
+    <% if @replies.size >= 1 %>
+      <% @post.sorted_replies.each do |reply| %>
+        <div class="row border my-1 align-items-center">
+          <!-- REPLY INFOS -->
+          <div class="col-md-4 p-3 border-right bg-secondary">
+            <p>par
+              <%= reply.user.display %>
+              <% if reply.user.role != nil %>
+                (<%= reply.user.role %>)
+              <% end %>
+              <br/>
+              <small class="text-muted">créé le <%= reply.created_at.to_formatted_s(:long) %></small><br/>
+              <small class="text-muted">édité le <%= reply.updated_at.to_formatted_s(:long) %></small>
+            </p>
+            <% if user_signed_in? && (current_user == reply.user || current_user.role == "moderator") %>
+              <%= link_to 'Supprimer', forum_post_reply_path(@post.forum, @post, reply), class: 'btn btn-outline-danger m-1', method: 'delete', data: {confirm: "Êtes-vous sûr ?"} %>
+            <% end %>
+            <% if user_signed_in? && current_user == reply.user %>
+              <%= link_to 'Editer', edit_forum_post_reply_path(@post.forum, @post, reply), class: 'btn btn-outline-primary m-4' %>
+            <% end %>
+          </div>
+          <!-- REPLY CONTENT -->
+          <div class="col-md-8 p-3">
+            <%= reply.content %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Pas de Réponse à ce Post pour le moment.</p>
+    <% end %>
+  </div>
 
-	<!-- RULES ALERTS -->
-	<!-- IF NOT LOGGED, MUST SIGNIN OR SIGNUP TO USE FORUM ALERT -->
-	<% if !(user_signed_in?) %>
-		<div class="alert alert-danger aler-dismissible fade show m-0 mb-4">
-			Pour répondre à ce post vous devez vous <%= link_to 'Connecter', new_user_session_path %> ou vous <%= link_to 'Inscrire', new_user_registration_path %>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		</div>
-	<% end %>
-	<% if user_signed_in? %>
-		<!-- IF LOGGED, MUST HAVE TAKEN THE COMMITMENT TO USE FORUM ALERT -->
-		<% if (@post.forum.commitment != nil ) && (current_user.commitments.include?(@post.forum.commitment) == false) %>
-			<div class="alert alert-danger alert-dismissible fade show m-0 mb-4">
-				Pour répondre à ce Post, vous devez 
-				<%= link_to "rejoindre le Mouvement #{@post.forum.commitment.title}", commitment_path(@post.forum.commitment) %>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		<% end %>
-	<% end %>
-
-	<!-- BREADCRUMB -->
-	<% if @post.forum.commitment %>
-		<h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to @post.forum.commitment.title, forum_path(@post.forum.id) %> / <%= link_to @post.title, forum_post_path(@post.id) %></h4>
-	<% else %>
-		<h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to "Général", forum_path(@post.forum.id) %> / <%= link_to @post.title, forum_post_path(@post.id) %></h4>
-	<% end %>
-
-	<!-- POST -->
-	<h4 class="text-right">Post</h4>
-	<h4><%= @post.title %></h4>
-	<div class="row border mb-3 align-items-center"> 
-
-		<!-- POST INFOS -->
-		<div class= "col-md-4 p-3 border-right bg-secondary">
-			<h5>par <%= @post.user.username %>
-			<% if @post.user.role != nil %>
-				(<%= @post.user.role %>)
-			<% end %>
-			</h5>
-			<small class="text-muted">créé le <%= @post.created_at.to_formatted_s(:long) %></small><br/>
-			<small class="text-muted">édité le <%= @post.updated_at.to_formatted_s(:long) %></small>
-			<!-- IF USER LOGGED -->
-			<% if user_signed_in? %> 
-				<!-- CAN DELETE IF AUTHOR OR MODERATOR -->
-				<% if current_user == @post.user || current_user.role == "moderator" %>
-					<%= link_to 'Supprimer', forum_post_path(@post.forum, @post), class:'btn btn-outline-secondary  mt-3',method: 'delete', data: {confirm: 'Êtes-vous sûr ?'} %>
-				<% end %>
-				<!-- CAN EDIT IF AUTHOR -->
-				<% if current_user == @post.user %>
-					<%= link_to 'Éditer', edit_forum_post_path(@post.forum, @post), class:'btn  btnlinkoutline btn-outline-primary'%>
-				<% end %>
-			<% end %>
-		</div>
-
-		<!-- POST CONTENT -->
-		<div class="col-md-8 p-3">
-			<%= @post.content %>
-		</div>
-
-	</div>
-
-	<!-- REPLIES -->
-	<div class="container p-0 mt-3"> 
-		<h4 class="mt-4 text-right">Réponses</h4>
-
-		<% if @replies.size >= 1 %>
-			<% @post.sorted_replies.each do |reply| %>
-
-				<div class="row border my-1 align-items-center"> 
-					<!-- REPLY INFOS -->
-					<div class= "col-md-4 p-3 border-right bg-secondary">
-						<p>par 
-						<%= reply.user.display %>
-						<% if reply.user.role != nil %>
-							(<%= reply.user.role %>)
-						<% end %>
-						<br/>
-						<small class="text-muted">créé le <%= reply.created_at.to_formatted_s(:long) %></small><br/>
-						<small class="text-muted">édité le <%= reply.updated_at.to_formatted_s(:long) %></small>
-						</p>
-						<% if user_signed_in? && (current_user == reply.user || current_user.role == "moderator") %>
-							<%= link_to 'Supprimer', forum_post_reply_path(@post.forum, @post, reply), class:'btn btn-outline-danger m-1', method: 'delete', data: {confirm: "Êtes-vous sûr ?"} %>
-						<% end %>
-						<% if user_signed_in? && current_user == reply.user %>
-							<%= link_to 'Editer', edit_forum_post_reply_path(@post.forum, @post, reply), class:'btn btn-outline-primary m-4' %>
-						<% end %>
-					</div>
-					<!-- REPLY CONTENT -->
-					<div class="col-md-8 p-3">
-						<%= reply.content %>
-					</div>
-				</div>
-
-			<% end %>
-
-		<% else %>
-			<p>Pas de Réponse à ce Post pour le moment.</p>
-		<% end %>
-
-	</div>
-
-	<!-- REPLY BUTTON AND RULES -->
-	<div class="row p-0">
-
-		<div class="col-12 p-0">
-			<!-- BACK BUTTON -->
-			<%= link_to 'Retour', forum_path(@post.forum.id), class: "btn btn-secondary  btnlink float-right" %>
-			<!-- IF FORUM IS NOT LINKED TO A COMMITMENT AND USER LOGGED IN -->
-			<!-- OR IF FORUM IS LINKED TO A COMMITMENT AND USER TOOK THIS COMMITMENT -->
-			<!-- OR IF USER IS MODERATOR -->
-			<% if user_signed_in? %>
-				<% if (@post.forum.commitment == nil) || (@post.forum.commitment && current_user.commitments.include?(@post.forum.commitment)) || current_user.role == 'moderator' %>
-					<%= link_to 'Répondre', new_forum_post_reply_path(@post.forum, @post), class:'btn btn-primary btnlink float-left' %>
-				<% end %>
-			<% end %>
-
-		</div>
-	</div>
+  <!-- REPLY BUTTON AND RULES -->
+  <div class="row p-0">
+    <div class="col-12 p-0">
+      <!-- BACK BUTTON -->
+      <%= link_to 'Retour', forum_path(@post.forum.id), class: "btn btn-secondary  btnlink float-right" %>
+      <!-- IF FORUM IS NOT LINKED TO A COMMITMENT AND USER LOGGED IN -->
+      <!-- OR IF FORUM IS LINKED TO A COMMITMENT AND USER TOOK THIS COMMITMENT -->
+      <!-- OR IF USER IS MODERATOR -->
+      <% if user_signed_in? %>
+        <% if (@post.forum.commitment == nil) || (@post.forum.commitment && current_user.commitments.include?(@post.forum.commitment)) || current_user.role == 'moderator' %>
+          <%= link_to 'Répondre', new_forum_post_reply_path(@post.forum, @post), class: 'btn btn-primary btnlink float-left' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
 </div>
