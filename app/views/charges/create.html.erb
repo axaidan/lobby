@@ -1,17 +1,16 @@
 <div class="container my-5">
-	<div class="container border bg-light p-3 shadow">
-		<p class="float-right"><%= fa_icon "leaf 2x" %></p>
-		<h2>Merci !</h2>
-		<h3>Vous avez effectué un don de <strong> <%= @amount %> € </strong>!</h3>
-		<hr>
-		<p class="px-4">
-		Vous allez recevoir un e-mail de confirmation.
-		<br/>
-		Encore merci !	
-		</p>
-		<p class="float-right"><small>L'équipe du Lobby</small></p>
-		<div class="clearfix"></div>
-	</div>
-
-	<%= link_to "Retour à l'accueil", home_path, class: "btn btn-block btn-primary"%>
+  <div class="container border bg-light p-3 shadow">
+    <p class="float-right"><%= fa_icon "leaf 2x" %></p>
+    <h2>Merci !</h2>
+    <h3>Vous avez effectué un don de <strong> <%= @amount %> € </strong>!</h3>
+    <hr>
+    <p class="px-4">
+      Vous allez recevoir un e-mail de confirmation.
+      <br/>
+      Encore merci !
+    </p>
+    <p class="float-right"><small>L'équipe du Lobby</small></p>
+    <div class="clearfix"></div>
+  </div>
+  <%= link_to "Retour à l'accueil", home_path, class: "btn btn-block btn-primary" %>
 </div>

@@ -25,11 +25,11 @@
           Forums<span class="sr-only">(current)</span>
         </a>
       </li>
-			
+
     </ul>
-    <ul class= "navbar-nav ml-3 mr-md-0">
+    <ul class="navbar-nav ml-3 mr-md-0">
       <!-- ADMIN BUTTONS DROPDOWN -->
-			<% if is_admin? %>
+      <% if is_admin? %>
         <li class="dropdown nav-item active navbar-nav">
           <a onclick="myFunction()" class="dropbtn nav-link text-muted">Admin</a>
           <div id="myDropdown" class="dropdown-content">
@@ -49,7 +49,7 @@
         </li>
       <% else %>
         <li class="nav-item pt-1 mb-1">
-          <%= link_to "Inscription", new_user_registration_path, class: "btn btn-primary"%>
+          <%= link_to "Inscription", new_user_registration_path, class: "btn btn-primary" %>
         </li>
         <li class="nav-item pt-1 mb-1">
           <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-primary" %>

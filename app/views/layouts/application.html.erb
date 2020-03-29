@@ -5,12 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  
-   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <!-- LINK vers vendor/assets/bootstrap.css -->
     <%= stylesheet_link_tag "bootstrap" %>
@@ -20,8 +20,8 @@
     <%= render 'layouts/navbar' %>
     <main class="p-0 m-0">
       <!-- CONTAINER SURROUNDING YIELD -->
-        <%= render 'layouts/flash'%>
-        <%= yield %>
+      <%= render 'layouts/flash' %>
+      <%= yield %>
       <!-- CONTAINER SURROUNDING YIELD END -->
     </main>
     <!-- PARTIAL FOOTER -->

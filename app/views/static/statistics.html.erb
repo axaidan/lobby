@@ -1,65 +1,65 @@
 <div class="container my-5">
-	<!-- PRESENTATION -->
-	<div>
-		<h2 class="text-center">Statistiques globales du Lobby</h2>
-		<h5 class="text-center text-muted">Suivez l'évolution du Lobby a travers ses statistiques essentielles
-		</h5>
+  <!-- PRESENTATION -->
+  <div>
+    <h2 class="text-center">Statistiques globales du Lobby</h2>
+    <h5 class="text-center text-muted">Suivez l'évolution du Lobby a travers ses statistiques essentielles
+    </h5>
+  </div>
+  <br><br><br>
 
+  <!-- LINE CHART 1 -->
+  <div class="container p-0 ">
+    <div class="bg-white p-4 border">
+      <h5>Évolution du nombre total d'utilisateurs dans le temps</h5>
+      <h6 class="text-muted">nombre total d'utilisateurs / jour</h6>
+      <br>
+      <%= line_chart(User.count_by_day) %>
+    </div>
+  </div>
+  <br><br>
 
-	</div>
-	<br><br><br>
+  <!-- PIE CHART 1 & 2 -->
+  <div class="container bg-white p-3 mb-5 border">
+    <div class="row">
+      <div class="col-md-4 p-4 ">
+        <h5 class="text-wrap ">Répartition des Mouvements</h5>
+        <h6 class="text-wrap text-muted">Retrouvez sur ce graphique la répartition des mouvements. <br/> Vous pourrez
+          ainsi vous tenir informés des mouvements les plus populaires !</h6>
+      </div>
+      <div class="col-md-8 p-3">
+        <%= pie_chart(Commitment.users_number, data: {min: 1000}, legend: false) %>
+      </div>
+    </div>
+  </div>
 
-	<!-- LINE CHART 1 -->
-	<div class="container p-0 ">
-		<div class="bg-white p-4 border">
-			<h5>Évolution du nombre total d'utilisateurs dans le temps</h5>
-			<h6 class="text-muted">nombre total d'utilisateurs / jour</h6>
-			<br>
-			<%= line_chart(User.count_by_day) %>
-		</div>
-	</div>
-	<br><br>
+  <div class="container p-4 bg-white border">
+    <div class="statistics  mt-2">
+      <h5 class="text-wrap text-center">Nombre d'utilisateurs par département</h5>
+      <h6 class="text-wrap text-muted text-center">Ce graphique correspond à la répartition des utilisateurs par
+        département.</h6>
+      <br>
+      <div class="">
+        <%= column_chart(User.group(:department).count, colors: ["#43beae", "#43beae"]) %>
+      </div>
+    </div>
+  </div>
 
-	<!-- PIE CHART 1 & 2 -->
-		<div class="container bg-white p-3 mb-5 border">
-			<div class="row">
-				<div class="col-md-4 p-4 ">
-					<h5 class="text-wrap ">Répartition des Mouvements</h5>
-					<h6 class="text-wrap text-muted">Retrouvez sur ce graphique la répartition des mouvements. <br/> Vous pourrez ainsi vous tenir informés des mouvements les plus populaires !</h6>
-				</div>
-				<div class="col-md-8 p-3">
-						<%= pie_chart(Commitment.users_number,data:{min:1000}, legend:false) %>
-				</div>
-			</div>
-		</div>
+  <br><br>
 
-	<div class="container p-4 bg-white border">
-			<div class="statistics  mt-2">
-				<h5 class="text-wrap text-center">Nombre d'utilisateurs par département</h5>
-				<h6 class="text-wrap text-muted text-center">Ce graphique correspond à la répartition des utilisateurs par département.</h6>
-				<br>
-					<div class="">
-					<%= column_chart(User.group(:department).count,  colors: ["#43beae", "#43beae"])%>
-					</div>
-			</div>
-		</div>
+  <!-- LINE CHART 2 -->
+  <div class="container p-0 border ">
+    <div class=" p-4 ">
+      <h5>Nombre d'utilisateurs créés chaque jour</h5>
+      <h6 class="text-muted">Utilisateurs créés / jour</h6>
+      <br>
+      <%= line_chart(User.group_by_day(:created_at).count) %>
+    </div>
+  </div>
 
-	<br><br>
+  <br><br>
 
-	<!-- LINE CHART 2 -->
-	<div class="container p-0 border ">
-		<div class=" p-4 ">
-			<h5>Nombre d'utilisateurs créés chaque jour</h5>
-			<h6 class="text-muted">Utilisateurs créés / jour</h6>
-			<br>
-			<%= line_chart(User.group_by_day(:created_at).count) %>
-		</div>
-	</div>
-
-	<br><br>
-
-	<div class="col-md-2 mx-auto p-0 mb-3">
-		<a class="btn btn-block btnlink btn-secondary" href="/">Retour à l'Accueil</a>
-	</div>
+  <div class="col-md-2 mx-auto p-0 mb-3">
+    <a class="btn btn-block btnlink btn-secondary" href="/">Retour à l'Accueil</a>
+  </div>
 </div>
 
