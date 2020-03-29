@@ -1,21 +1,21 @@
 <div class='container d-flex my-5 justify-content-center'>
-<div class=" align-self-center">
-<h2 class='text-center'>Mot de passe oublié ?</h2>
-<br>
+  <div class=" align-self-center">
+    <h2 class='text-center'>Mot de passe oublié ?</h2>
+    <br>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <label>Email</label><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: 'form-control border'  %>
+      <div class="field">
+        <label>Email</label><br/>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control border' %>
+      </div>
+      <br>
+
+      <div class="actions">
+        <%= f.submit "Envoyez-moi les instructions", class: 'btn btn-success btn-md' %>
+      </div>
+    <% end %>
+    <br>
   </div>
-<br>
-
-  <div class="actions">
-    <%= f.submit "Envoyez-moi les instructions",  class: 'btn btn-success btn-md'  %>
-  </div>
-<% end %>
-<br>
-</div>
 </div>

@@ -1,4 +1,7 @@
 class RepliesController < ApplicationController
+	before_action :authenticate_user!
+	before_action :user_is_author, only: [:edit, :update, :destroy]
+	before_action :commitment_taken, only: [:new, :create]
   before_action :set_post, only: [:create, :update, :destroy]
   before_action :set_reply, only: [:edit, :update, :destroy]
 
@@ -54,4 +57,21 @@ class RepliesController < ApplicationController
   def reply_params
     params.require(:reply).permit(:content)
   end
+
+	def user_is_author
+		@reply = set_reply
+		if (current_user != @reply.user || current_user.role == 'moderator')
+			flash[:error] = "Vous n'êtes pas l'auteur de cette Réponse, vous n'avez pas l'autorisation pour effectuer cette action."
+			redirect_to home_path
+		end
+	end
+
+	def commitment_taken
+		@post = set_post
+		if (@post.forum.commitment && !(current_user.commitments.include?(@post.forum.commitment)))
+			flash[:error] = "Vous devez avoir rejoint le Mouvement \"#{@post.forum.commitment.title}\" pour utiliser le Forum qui lui est dédié."
+			redirect_to commitments_path
+		end	
+	end
+
 end

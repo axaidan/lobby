@@ -1,12 +1,9 @@
 <div class="container my-5 m-auto">
-
 	<!-- THEME TITLE -->
 	<div class="container text-center mt-3 pt-3 pb-3">
-		<h1><%= @theme.title%></h1>
-
+		<h1><%= @theme.title %></h1>
 		<!-- BUTTON TO FOLLOW A THEME OR UNFOLLOW A THEME -->
 		<div class="row justify-content-center">
-
 			<div class="col-md-3 d-flex justify-content-center align-items-center p-0">
 				<% if user_signed_in? %>
 					<% if current_user.themes.include?(@theme) %>
@@ -18,26 +15,19 @@
 					<%= link_to "Suivre ce Thème", user_session_path, method: 'get', class: "btn btn-primary mt-3 btn-link" %>
 				<% end %>
 			</div>
-
 			<!-- BUTTON BACK TO THEME#INDEX.HTML.ERB -->
 			<div class="col-md-3 d-flex justify-content-center align-items-center p-0">
 				<%= link_to "Retour aux Thèmes", themes_path, class: "btn btn-outline-secondary mt-3 btnlinkoutline text-wrap" %>
 			</div>
-
 		</div>
-
 	</div>
-
 	<!-- THEME PRESENTATION GRID -->
 	<div class="container mt-3">
-
 		<div class="row">
-
 			<!-- LEFT CELL -->
 			<div class="col-md-4">
 				<div class="card" style="height: 100%;">
 					<h3 class="card-header">Informations</h3>
-
 					<div class="card-body p-0">
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item bg-secondary pt-1 pb-0"><h5>Description</h5></li>
@@ -46,14 +36,11 @@
 							</li>
 						</ul>
 					</div>
-
 				</div>
 			</div>
 
 			<div class="col-md-8 firstline">
-
 				<div class="row pb-4">
-
 					<!-- TOP MID CELL -->
 					<div class="col-md-7">
 						<div class="card" style="height: 100%;">
@@ -89,7 +76,6 @@
 								</table>
 							</div>
 						</div>
-
 					</div>
 
 					<!-- TOP RIGHT CELL -->
@@ -102,7 +88,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 
 				<!-- BOTTOM RIGHT CELL -->
@@ -111,100 +96,93 @@
 						<div class="card m-0">
 							<h3 class="card-header">Évolution du nombre d'utilisateurs</h3>
 							<div class="card-body">
-								<%= line_chart(@theme.users_by_day) %>
+								<% if @theme.users.count > 0 %>
+									<%= line_chart(@theme.users_by_day) %>
+								<% else %>
+									<div>Il n'y a pas d'utilisateur suivant ce Thème pour le moment.</div>
+								<% end %>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
 	<!-- SOURCES -->
-  <div class="container mt-4">
-    <div class="card">
-      <h3 class="card-header text-center">Sources</h3>
-      <div class="card-body pb-0 pt-1">
-        <div class="row align-items-center">
-
-          <% if @theme.sources.count > 0 %>
-            <% @theme.sources.each do |each_source| %>
-              <div class="col-md-<%= 12 / @theme.sources.count %>">
-                <a href="<%= each_source.url %>" target="_blank">
-                  <h5 class="text-center mt-2" style="height: 6rem;"><%= each_source.title %></h5>
-                  <h6><small>édité par</small> <%= each_source.media %>.</h6>
-                  <p><%= each_source.description %></p>
-                </a>
-              </div>
-            <% end %>
-          <% else %>
-            </p>Il n'y a pas de Source pour ce Mouvement.</p>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container mt-4">
+		<div class="card">
+			<h3 class="card-header text-center">Sources</h3>
+			<div class="card-body pb-0 pt-1">
+				<div class="row align-items-center">
+					<% if @theme.sources.count > 0 %>
+						<% @theme.sources.each do |each_source| %>
+							<div class="col-md-<%= 12 / @theme.sources.count %>">
+								<a href="<%= each_source.url %>" target="_blank">
+									<h5 class="text-center mt-2" style="height: 6rem;"><%= each_source.title %></h5>
+									<h6><small>édité par</small> <%= each_source.media %>.</h6>
+									<p><%= each_source.description %></p>
+								</a>
+							</div>
+						<% end %>
+					<% else %>
+						</p>Il n'y a pas de Source pour ce Mouvement.</p>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- THIS THEME'S COMMIMENTS -->
 	<div class="container mt-4 border-0">
 		<div class="border-0 bg-secondary text-center pt-2 pb-1">
 			<h4 class="align-middle">
-				Tous les Mouvements pour ce Thème 
+				Tous les Mouvements pour ce Thème
 			</h4>
 		</div>
-
 		<div class="col-md">
-    <% if @theme.commitments.count == 0 %>
-      <div class="list-group">
-        <div class="list-group-item">
-          Il n'y a pas de Mouvement pour ce Thème pour le moment.
-        </div>
-      </div>
-
-    <% else %>
-
-      <div class="row border-0 ">
-        <% @theme.commitments.each do |each_commitment| %>
-
-          <div class="col-md-3 p-2">
-            <div class="card border-primary commitement " style="min-height: 200px">
-              <a href="<%= commitment_path(each_commitment.id)%>" style="text-decoration: none">
-                <div class="card-body text-center ">
-                  <h6 class="card-title text-center title-card-homepage" style="height: 7rem;">
-                    <%= each_commitment.title %>
-                  </h6>
-                  <p class="card-text text-center">Inscrits : <%= each_commitment.users.count %> </p>
-                </div>
-              </a>
-            </div>
-          </div>
-
-        <% end %>
-      <% end %>
-      </div>
-  </div>
-
-
+			<% if @theme.commitments.count == 0 %>
+				<div class="list-group">
+					<div class="list-group-item">
+						Il n'y a pas de Mouvement pour ce Thème pour le moment.
+					</div>
+				</div>
+			<% else %>
+				<div class="row border-0 ">
+					<% @theme.commitments.each do |each_commitment| %>
+						<div class="col-md-3 p-2">
+							<div class="card border-primary commitement " style="min-height: 200px">
+								<a href="<%= commitment_path(each_commitment.id) %>" style="text-decoration: none">
+									<div class="card-body text-center ">
+										<h6 class="card-title text-center title-card-homepage" style="height: 7rem;">
+											<%= each_commitment.title %>
+										</h6>
+										<p class="card-text text-center">Inscrits : <%= each_commitment.users.count %> </p>
+									</div>
+								</a>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
+				</div>
+		</div>
 	</div>
 
 	<!-- USERS LIST FOR THIS THEME -->
 	<div class="container mt-4">
-
 		<div class="border bg-secondary text-center pt-2 pb-1">
 			<h4 class="align-middle">
-				Liste des utilisateurs suivant ce Thème 
+				Liste des utilisateurs suivant ce Thème
 			</h4>
 		</div>
-
-
 
 		<table class="table table-bordered table-sm">
 			<% if @theme.users.count == 0 %>
 				<thead>
-					<tr><td>Il n'y a pas d'utilisateur ayant rejoint ce Thème pour le moment</td></tr>
+					<tr>
+						<td>Il n'y a pas d'utilisateur ayant rejoint ce Thème pour le moment</td>
+					</tr>
 				</thead>
 			<% else %>
 				<thead>
@@ -225,7 +203,5 @@
 				</tbody>
 			<% end %>
 		</table>
-
 	</div>
-
 </div>

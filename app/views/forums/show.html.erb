@@ -1,80 +1,79 @@
-<div class="container my-5"> 
+<div class="container my-5">
+  <!-- RULES ALERTS -->
+  <!-- IF NOT LOGGED, MUST SIGNIN OR SIGNUP TO USE FORUM ALERT -->
+  <% if !(user_signed_in?) %>
+    <div class="alert alert-danger aler-dismissible fade show m-0 mb-4">
+      Pour répondre participer à ce Forum vous devez vous <%= link_to 'Connecter', new_user_session_path %> ou
+      vous <%= link_to 'Inscrire', new_user_registration_path %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <!-- IF LOGGED, MUST HAVE TAKEN THE COMMITMENT TO USE FORUM ALERT -->
+    <% if (@forum.commitment != nil) && (current_user.commitments.include?(@forum.commitment) == false) %>
+      <div class="alert alert-danger alert-dismissible fade show m-0 mb-4">
+        Pour participer à ce Forum, vous devez
+        <%= link_to "rejoindre le Mouvement #{@forum.commitment.title}", commitment_path(@forum.commitment) %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
 
-	<!-- RULES ALERTS -->
-	<!-- IF NOT LOGGED, MUST SIGNIN OR SIGNUP TO USE FORUM ALERT -->
-	<% if !(user_signed_in?) %>
-		<div class="alert alert-danger aler-dismissible fade show m-0 mb-4">
-			Pour répondre participer à ce Forum vous devez vous <%= link_to 'Connecter', new_user_session_path %> ou vous <%= link_to 'Inscrire', new_user_registration_path %>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		</div>
-	<% end %>
-	<% if user_signed_in? %>
-		<!-- IF LOGGED, MUST HAVE TAKEN THE COMMITMENT TO USE FORUM ALERT -->
-		<% if (@forum.commitment != nil ) && (current_user.commitments.include?(@forum.commitment) == false) %>
-			<div class="alert alert-danger alert-dismissible fade show m-0 mb-4">
-				Pour participer à ce Forum, vous devez
-				<%= link_to "rejoindre le Mouvement #{@forum.commitment.title}", commitment_path(@forum.commitment) %>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		<% end %>
-	<% end %>
+  <div class="container">
+    <% if @forum.commitment %>
+      <h4 class="mt-4"><%= link_to "Forums", forums_path %>
+        / <%= link_to @forum.commitment.title, forum_path(@forum.id) %></h4>
+    <% else %>
+      <h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to "Général", forum_path(@forum.id) %></h4>
+    <% end %>
 
-	<div class="container">
-		<% if @forum.commitment %>
-			<h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to @forum.commitment.title, forum_path(@forum.id) %></h4>
-		<% else %>
-			<h4 class="mt-4"><%= link_to "Forums", forums_path %> / <%= link_to "Général", forum_path(@forum.id) %></h4>
-		<% end %>
+    <% if @forum.posts.count > 0 %>
+      <table class="table table-bordered table-striped mt-4">
+        <thead>
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">Auteur</th>
+          <th scope="col">Réponses</th>
+          <th scope="col">créé il y a</th>
+          <th scope="col">dernière Réponse</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @forum.posts.each do |post| %>
+          <tr>
+            <td class="py-2"><%= link_to post.title, forum_post_path(@forum, post) %></td>
+            <td class="py-2"><%= post.user.username %></td>
+            <td class="py-2"><%= post.replies.count %></td>
+            <td class="py-2"><%= time_ago_in_words(post.created_at) %></td>
+            <% if post.replies.count > 0 %>
+              <td class="py-2"><%= time_ago_in_words(post.last_reply.created_at) %></td>
+            <% else %>
+              <td class="py-2">Pas de Réponse</td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>Il n'y a pas encore de Post sur ce Forum.</p>
+    <% end %>
+  </div>
 
-		<% if @forum.posts.count > 0 %>
-			<table class="table table-bordered table-striped mt-4">
-				<thead>
-					<tr>
-						<th scope="col">Titre</th>
-						<th scope="col">Auteur</th>   
-						<th scope="col">Réponses</th>   
-						<th scope="col">créé il y a</th>   
-						<th scope="col">dernière Réponse</th>   
-					</tr>
-				</thead>
-				<tbody>
-					<% @forum.posts.each do |post| %>
-						<tr>
-							<td class="py-2"><%= link_to post.title, forum_post_path(@forum, post) %></td>
-							<td class="py-2"><%= post.user.username %></td>
-							<td class="py-2"><%= post.replies.count %></td>
-							<td class="py-2"><%= time_ago_in_words(post.created_at) %></td>
-							<% if post.replies.count > 0 %>
-								<td class="py-2"><%= time_ago_in_words(post.last_reply.created_at) %></td>
-							<% else %>
-								<td class="py-2">Pas de Réponse</td>
-							<% end %>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-		<% else %>
-			<p>Il n'y a pas encore de Post sur ce Forum.</p>
-		<% end %>
-	</div>
-
-	<div class="container">
-		<!-- BACK BUTTON -->
-		<%= link_to 'Retour', forums_path, class: "btn btn-secondary btnlink float-right" %>
-		<!-- IF FORUM IS NOT LINKED TO A COMMITMENT AND USER LOGGED IN -->
-		<!-- OR IF FORUM IS LINKED TO A COMMITMENT AND USER TOOK THIS COMMITMENT -->
-		<!-- OR IF USER IS MODERATOR -->
-		<% if user_signed_in? %>
-			<% if (@forum.commitment == nil) || (@forum.commitment && current_user.commitments.include?(@forum.commitment)) || current_user.role == 'moderator' %>
-				<%= link_to 'Créer un Post', new_forum_post_path(@forum), class:'btn btn-primary btnlink float-left' %>
-			<% end %>
-		<% end %>
-
-	</div>
-
+  <div class="container">
+    <!-- BACK BUTTON -->
+    <%= link_to 'Retour', forums_path, class: "btn btn-secondary btnlink float-right" %>
+    <!-- IF FORUM IS NOT LINKED TO A COMMITMENT AND USER LOGGED IN -->
+    <!-- OR IF FORUM IS LINKED TO A COMMITMENT AND USER TOOK THIS COMMITMENT -->
+    <!-- OR IF USER IS MODERATOR -->
+    <% if user_signed_in? %>
+      <% if (@forum.commitment == nil) || (@forum.commitment && current_user.commitments.include?(@forum.commitment)) || current_user.role == 'moderator' %>
+        <%= link_to 'Créer un Post', new_forum_post_path(@forum), class: 'btn btn-primary btnlink float-left' %>
+      <% end %>
+    <% end %>
+  </div>
 
 </div>
