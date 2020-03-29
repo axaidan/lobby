@@ -186,8 +186,21 @@ p {
 	background-color: #62c8a69a!important;
 }
 
+.bgshow {
+	background-color: #62c8a6e5!important;
+
+}
+
+.bglight {
+	background-color: #a4dfd0c9!important;
+}
+
 .backg-secondary {
 	background-color: #cf445bbb!important;
+}
+
+.bgverylight {
+	background-color: #c0d3ce2d!important;
 }
 
 .profilpage {

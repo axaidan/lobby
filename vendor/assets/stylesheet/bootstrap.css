@@ -5235,7 +5235,7 @@ input[type="button"].btn-block {
 
 .badge {
   display: inline-block;
-  padding: 0.25em 0.4em;
+  padding: 0.45em 0.6em;
   font-size: 75%;
   font-weight: 700;
   line-height: 1;
@@ -5291,12 +5291,12 @@ a.badge-primary:focus, a.badge-primary.focus {
 
 .badge-secondary {
   color: #1a1a1a;
-  background-color: #fff;
+  background-color: rgba(90, 206, 191, 0.562);
 }
 
 a.badge-secondary:hover, a.badge-secondary:focus {
   color: #1a1a1a;
-  background-color: #e6e5e5;
+  background-color: #32aa96a6;
 }
 
 a.badge-secondary:focus, a.badge-secondary.focus {
