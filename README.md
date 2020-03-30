@@ -47,8 +47,8 @@
 </ul>
 <h3>The Project</h3>
 <p>Website => https://le-lobby.herokuapp.com/</p>
-<p>WThis is the first version of the site. It is set to be improved in the coming weeks.</p>
-<h5>WWhat we are:</h5>
+<p>This is the first version of the site. It is set to be improved in the coming weeks.</p>
+<h5>What we are:</h5>
 <ul>
 <li>a platform bringing together environmental commitments, currently confined to the little gestures of daily life</li>
 a platform allowing you as a visitor or as a user to send us your suggestions</li>
