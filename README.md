@@ -67,6 +67,6 @@ a student project in the field of web development</li>
 <ul>
 <li>a company</li>
 <li>a lobby defending private or commercial interests</li>
-<li>a social network reselling the information of its user</li>s
+<li>a social network reselling the information of its user</li>
 <li>a simple student project: we want to develop and support this network beyond our training</li>
 </ul>
