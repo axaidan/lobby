@@ -1,17 +1,17 @@
 <div class="container my-5">
 
 	<!-- COMMITMENT TITLE -->
-	<div class="container bg-primary p-3 mb-3">
+	<div class="container bg-primary p-3 mb-4 shadow">
 		<h2><%= @commitment.title%></h2>
 	</div>
 
 	<hr>
 
 	<!-- COMMITMENT PRESENTATION -->
-	<div class="row mb-1">
+	<div class="row mb-4">
 
 		<div class="col-md-8">
-			<div class="card border">
+			<div class="card border-primary shadow">
 				<h3 class="card-header">Informations</h3>
 
 				<div class="card-body">
@@ -23,44 +23,38 @@
 						<%= link_to each_theme.title, theme_path(each_theme.id),class:'badge badge-secondary' %>
 					<% end %>
 				</div>
+			<!-- BUTTON TO FORUM IF FORUM EXISTS -->
+			<% if @commitment.forum %>
+				<%= link_to "Forum", forum_path(@commitment.forum.id), class: "btn btn-outline-primary btnlinkoutline mt-3 col-md-3 align-self-end"%>
+			<% end %>
 			</div>
 		</div>
 
 		<div class="col-md-4">
-			<div class="card bgshow d-flex justify-content-center p-3" style="height: 100%;">
+			<div class="card d-flex justify-content-center border-0 shadow" style="height: 100%;">
+				<div class="card-body bgshow">
 				<h1 class="text-white"><%= @commitment.users.count %></h1>
 				<h5 class="text-white">utilisateurs<br/>ont rejoint<br/>ce Mouvement</h5>
+				</div>
+				<!-- BUTTON TO TAKE A COMMITMENT OR TAKE OUT A COMMITMENT -->
+				<% if user_signed_in? %>
+					<% if current_user.commitments.include?(@commitment) %>
+						<%= link_to "Quitter", commitment_user_commitment_path(@commitment.id, @commitment.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
+					<% else %>
+						<%= link_to "Rejoindre", commitment_user_commitments_path(@commitment.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
+					<% end %>
+				<% else %>
+					<%= link_to "Rejoindre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
+				<% end %>
 			</div>
 		</div>
 
-	</div>
-
-	<div class="container mb-3">
-		<div class="row justify-content-between">
-
-			<!-- BUTTON TO FORUM IF FORUM EXISTS -->
-			<% if @commitment.forum %>
-				<%= link_to "Forum", forum_path(@commitment.forum.id), class: "btn btn-outline-primary btnlinkoutline mt-3 col-md-3"%>
-			<% end %>
-
-			<!-- BUTTON TO TAKE A COMMITMENT OR TAKE OUT A COMMITMENT -->
-			<% if user_signed_in? %>
-				<% if current_user.commitments.include?(@commitment) %>
-					<%= link_to "Quitter", commitment_user_commitment_path(@commitment.id, @commitment.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-secondary btnlink mt-3 text-wrap col-md-3' %>
-				<% else %>
-					<%= link_to "Rejoindre", commitment_user_commitments_path(@commitment.id), method: 'post', class: "btn btn-primary btnlink mt-3 text-wrap col-md-3" %>
-				<% end %>
-			<% else %>
-				<%= link_to "Rejoindre", user_session_path, method: 'get', class: "btn btn-primary btnlink mt-3 text-wrap col-md-3" %>
-			<% end %>
-
-		</div>
 	</div>
 
 	<hr>
 
 	<!-- SOURCES -->
-	<div class="card mb-3">
+	<div class="card mb-4 shadow">
 		<h3 class="card-header">Sources</h3>
 		<div class="card-body bgverylight pb-0 pt-1">
 			<div class="row align-items-center">
@@ -87,8 +81,8 @@
 	<hr>
 
 	<!-- STATISTICS -->
-	<div class="card mb-3">
-		<h3 class ="card-header">Statistiques</h3>
+	<div class="card mb-4 shadow">
+		<h3 class="card-header">Statistiques</h3>
 
 		<div class="row card-body mb-0">
 			<div class="col-md-8">
@@ -113,10 +107,12 @@
 	<hr>
 
 	<!-- USERS LIST FOR THIS COMMITMENT -->
-	<div class="card mb-3">
+	<div class="card mb-4 shadow">
+
 		<div class="card-header">
 			<h3 class="align-middle">Utilisateurs</h3>
 		</div>
+
 		<div class="card-body p-0">
 
 			<table class="table table-bordered table-sm m-0">
@@ -143,11 +139,14 @@
 					</tbody>
 				<% end %>
 			</table>
+
 		</div>
+
 	</div>
 
 	<!-- BUTTON BACK TO COMMITMENTS#INDEX.HTML.ERB -->
 	<div class="col-md-1 mx-auto p-0 mb-4">
-		<%= link_to "Retour", commitments_path, class: "btn btn-outline-secondary btnlinkoutline mt-3 mx-auto" %>
+		<%= link_to "Retour", commitments_path, class: "btn btn-outline-secondary btnlinkoutline mt-3 align-self-end" %>
 	</div>
+
 </div>
