@@ -1,40 +1,42 @@
 <div class="container my-5">
 
 	<!-- COMMITMENT TITLE -->
-	<div class="container bg-primary p-3 mb-4 shadow">
+	<div class="container bg-primary p-3 shadow">
 		<h2><%= @commitment.title%></h2>
 	</div>
 
-	<hr>
+	<hr class="my-4">
 
 	<!-- COMMITMENT PRESENTATION -->
-	<div class="row mb-4">
+	<div class="row">
 
 		<div class="col-md-8">
-			<div class="card border-primary shadow">
+			<div class="card border-primary bgverylight shadow">
 				<h3 class="card-header">Informations</h3>
 
 				<div class="card-body">
 					<h5 class="mt-2">Description</h5>
 					<p><%= @commitment.description %></p>
-
 					<h5>Thèmes associés</h5>
 					<% @commitment.themes.each do |each_theme| %>
 						<%= link_to each_theme.title, theme_path(each_theme.id),class:'badge badge-secondary' %>
 					<% end %>
+					<hr>
+					<!-- BUTTON TO FORUM IF FORUM EXISTS -->
+					<div class="mt-3">
+						<% if @commitment.forum %>
+							<%= link_to "Forum", forum_path(@commitment.forum.id), class: "btn btn-outline-primary btnlinkoutline mt-5"%>
+						<% end %>
+					</div>
 				</div>
-			<!-- BUTTON TO FORUM IF FORUM EXISTS -->
-			<% if @commitment.forum %>
-				<%= link_to "Forum", forum_path(@commitment.forum.id), class: "btn btn-outline-primary btnlinkoutline mt-3 col-md-3 align-self-end"%>
-			<% end %>
 			</div>
 		</div>
 
 		<div class="col-md-4">
 			<div class="card d-flex justify-content-center border-0 shadow" style="height: 100%;">
 				<div class="card-body bgshow">
-				<h1 class="text-white"><%= @commitment.users.count %></h1>
-				<h5 class="text-white">utilisateurs<br/>ont rejoint<br/>ce Mouvement</h5>
+					<h1 class="text-white"><%= @commitment.users.count %></h1>
+					<h5 class="text-white">utilisateurs<br/>ont rejoint<br/>ce Mouvement</h5>
 				</div>
 				<!-- BUTTON TO TAKE A COMMITMENT OR TAKE OUT A COMMITMENT -->
 				<% if user_signed_in? %>
@@ -51,20 +53,20 @@
 
 	</div>
 
-	<hr>
+	<hr class="my-4">
 
 	<!-- SOURCES -->
-	<div class="card mb-4 shadow">
+	<div class="card shadow">
 		<h3 class="card-header">Sources</h3>
 		<div class="card-body bgverylight pb-0 pt-1">
-			<div class="row align-items-center">
+			<div class="row d-flex align-items-center">
 
 				<% if @commitment.sources.count > 0 %>
 					<% @commitment.sources.each do |each_source| %>
 
-						<div class="my-2 col-md-4 p-2 ">
+						<div class="my-2 col-md-4 p-2">
 							<a href="<%= each_source.url %>" target="_blank">
-								<h5 class="mt-2" style="height: 6rem;"><%= each_source.title %></h5>
+								<h5 class="mt-2 align-self-center text-center" style="height: 6rem;"><%= each_source.title %></h5>
 								<h6><small>édité par</small> <%= each_source.media %>.</h6>
 								<p><%= each_source.description %></p>
 							</a>
@@ -78,13 +80,13 @@
 		</div>
 	</div>
 
-	<hr>
+	<hr class="my-4">
 
 	<!-- STATISTICS -->
-	<div class="card mb-4 shadow">
+	<div class="card shadow">
 		<h3 class="card-header">Statistiques</h3>
 
-		<div class="row card-body mb-0">
+		<div class="card-body row bgverylight mb-0">
 			<div class="col-md-8">
 				<h5 class="mb-4">Évolution du nombre d'utilisateurs</h5>
 				<% if @commitment.users.count > 0 %>
@@ -104,16 +106,16 @@
 		</div>
 	</div>
 
-	<hr>
+	<hr class="my-4">
 
 	<!-- USERS LIST FOR THIS COMMITMENT -->
-	<div class="card mb-4 shadow">
+	<div class="card shadow">
 
 		<div class="card-header">
-			<h3 class="align-middle">Utilisateurs</h3>
+			<h3>Utilisateurs</h3>
 		</div>
 
-		<div class="card-body p-0">
+		<div class="card-body bgverylight p-0">
 
 			<table class="table table-bordered table-sm m-0">
 				<% if @commitment.users.count == 0 %>
