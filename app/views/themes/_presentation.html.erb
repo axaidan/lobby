@@ -1,0 +1,35 @@
+<div class="row">
+
+	<div class="col-md-8">
+		<div class="card border-primary bgverylight shadow">
+			<h3 class="card-header">Informations</h3>
+
+			<div class="card-body">
+				<h5 class="mt-2">Description</h5>
+				<p><%= @theme.description %></p>
+				<!-- BUTTON TO FORUM IF FORUM EXISTS -->
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card d-flex justify-content-center border-0 shadow" style="height: 100%;">
+			<div class="card-body bgshow">
+				<h1 class="text-white"><%= @theme.users.count %></h1>
+				<h5 class="text-white">utilisateurs<br/>suivent<br/>ce Thème</h5>
+			</div>
+
+			<!-- BUTTON TO FOLLOW OR UN-FOLLOW THE THEME -->
+			<% if user_signed_in? %>
+				<% if current_user.commitments.include?(@theme) %>
+					<%= link_to "Quitter", commitment_user_commitment_path(@theme.id, @theme.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
+				<% else %>
+					<%= link_to "Suivre", commitment_user_commitments_path(@theme.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
+				<% end %>
+			<% else %>
+				<%= link_to "Suivre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
+			<% end %>
+		</div>
+	</div>
+
+</div>

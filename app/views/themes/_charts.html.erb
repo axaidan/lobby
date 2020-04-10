@@ -1,0 +1,23 @@
+<div class="card shadow">
+  <h3 class="card-header">Statistiques</h3>
+
+  <div class="card-body row bgverylight mb-0">
+    <div class="col-md-8">
+      <h5 class="mb-4">Évolution du nombre d'utilisateurs</h5>
+      <% if @theme.users.count > 0 %>
+        <%= line_chart(@theme.users_by_day) %>
+      <% else %>
+        <div>Il n'y a pas d'utilisateur ayant rejoint ce Mouvement pour le moment.</div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <h5>Géographie</h5>
+      <h6 class="text-muted">utilisateurs / département</h6>
+      <div class="p-2">
+        <%= pie_chart(@theme.users.group(:department).count, legend: false) %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,31 @@
+<div class="card shadow">
+    <h3 class="card-header">
+      Tous les Mouvements pour ce Thème
+    </h3>
+  <div class="col-md">
+    <% if @theme.commitments.count == 0 %>
+      <div class="list-group">
+        <div class="list-group-item">
+          Il n'y a pas de Mouvement pour ce Thème pour le moment.
+        </div>
+      </div>
+    <% else %>
+      <div class="row border-0 ">
+        <% @theme.commitments.each do |each_commitment| %>
+          <div class="col-md-3 p-2">
+            <div class="card border-primary commitement " style="min-height: 200px">
+              <a href="<%= commitment_path(each_commitment.id) %>" style="text-decoration: none">
+                <div class="card-body text-center ">
+                  <h6 class="card-title text-center title-card-homepage" style="height: 7rem;">
+                    <%= each_commitment.title %>
+                  </h6>
+                  <p class="card-text text-center">Inscrits : <%= each_commitment.users.count %> </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
+  </div>
+</div>
