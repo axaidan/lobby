@@ -1,0 +1,45 @@
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="card border-primary bgverylight shadow">
+        <h3 class="card-header">Informations</h3>
+
+        <div class="card-body">
+          <h5 class="mt-2">Description</h5>
+          <p><%= @commitment.description %></p>
+          <h5>Thèmes associés</h5>
+          <% @commitment.themes.each do |each_theme| %>
+            <%= link_to each_theme.title, theme_path(each_theme.id),class:'badge badge-secondary' %>
+          <% end %>
+          <hr>
+          <!-- BUTTON TO FORUM IF FORUM EXISTS -->
+          <div class="mt-3">
+            <% if @commitment.forum %>
+              <%= link_to "Forum", forum_path(@commitment.forum.id), class: "btn btn-outline-primary btnlinkoutline mt-5"%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card d-flex justify-content-center border-0 shadow" style="height: 100%;">
+        <div class="card-body bgshow">
+          <h1 class="text-white"><%= @commitment.users.count %></h1>
+          <h5 class="text-white">utilisateurs<br/>ont rejoint<br/>ce Mouvement</h5>
+        </div>
+        <!-- BUTTON TO TAKE A COMMITMENT OR TAKE OUT A COMMITMENT -->
+        <% if user_signed_in? %>
+          <% if current_user.commitments.include?(@commitment) %>
+            <%= link_to "Quitter", commitment_user_commitment_path(@commitment.id, @commitment.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
+          <% else %>
+            <%= link_to "Rejoindre", commitment_user_commitments_path(@commitment.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
+          <% end %>
+        <% else %>
+          <%= link_to "Rejoindre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
