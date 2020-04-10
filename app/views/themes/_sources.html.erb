@@ -3,22 +3,21 @@
 	<div class="card-body bgverylight pb-0 pt-1">
 		<div class="row d-flex align-items-center">
 
-			<% if @commitment.sources.count > 0 %>
-				<% @commitment.sources.each do |each_source| %>
+			<% if @theme.sources.count > 0 %>
+				<% @theme.sources.each do |each_source| %>
 
 					<div class="my-2 col-md-4 p-2">
 						<a href="<%= each_source.url %>" target="_blank">
-							<h5 class="mt-2 align-self-center py-2" style="max-height: 6rem;"><%= each_source.title %></h5>
+							<h5 class="mt-2 align-self-center py-2" style="max-height: 6rem;"><%= each_source.title %></h5> 
 							<h6><small>édité par</small> <%= each_source.media %>.</h6>
 							<p><%= each_source.description %></p>
 						</a>
 					</div>
 				<% end %>
 			<% else %>
-				</p>Il n'y a pas de Source pour ce Mouvement.</p>
+				</p>Il n'y a pas de Source pour ce Thème.</p>
 			<% end %>
 
 		</div>
 	</div>
 </div>
-
