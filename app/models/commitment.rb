@@ -4,7 +4,7 @@ class Commitment < ApplicationRecord
 	after_create :create_forum
 
 	# VALIDATIONS
-	validates :title, presence: {message: ": Le titre est obligatoire"}, length: {minimum: 10, message: ": Le titre doit avoir 10 caractères minimum"}
+	validates :title, presence: {message: ": Le titre est obligatoire"}, length: {minimum: 10, message: ": Le titre doit avoir 10 caractères minimum."}
 	validates :description, presence: {message: ": La description est obligatoire"}, length: {minimum: 20, message: ": La description doit avoir 20 caractères minimum"}
 	validates :commitment_themes, presence: true
 	validates :sources, presence: true
