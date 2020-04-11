@@ -1,35 +1,54 @@
 <div class="container my-5">
 
-  <h2 class="text-center pb-4">Tous les Mouvements</h2>
+	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
+		<h2 class="text-white">Mouvements</h2>
+		<div class="d-flex justify-content-center align-items-center rounded-circle bg-light p-3 text-primary"><%= fa_icon 'exclamation 3x', class: 'mx-3' %></div>
+	</div>
 
-  <div class="col-md-11 m-auto">
-    <% if @commitments.count == 0 %>
-      <div class="list-group">
-        <div class="list-group-item">
-          Il n'y a pas de Mouvement actuellement sur le Lobby...
-        </div>
-      </div>
-    <% else %>
+	<div class="container bgverylight p-3 border shadow">	
+		<p>Les <span class="font-weight-bold">Mouvements</span> sont des démarches ayant un impact positif sur l'environnement.</p>
+		<p>
+		Chaque Mouvement dispose de <span class="font-weight-bold">Sources</span> vous permettant de vérifier sa pertinence,
+		ainsi que d'un <span class="font-weight-bold">Forum</span> si vous souhaitez échanger sur ce sujet avec d'autres utilisateurs.
+		</p>
+		<p>
+		Vous pouvez <span class="font-weight-bold">Rejoindre</span> un Mouvement si, vous aussi, vous souhaitez appliquer cette démarche à votre quotidien et si vous pensez que c'est un outil de la transition écologique. 
+		</p>
+	</div>
 
-      <div class="row">
-        <% @commitments.each do |each_commitment| %>
-          <div class="col-md-6 p-2">
-            <div class="card border-primary commitement text-center" style="min-height: 200px">
-              <a href="<%= commitment_path(each_commitment.id) %>" style="text-decoration: none">
-                <div class="card-body">
-                  <h5 class="card-title text-center" style="height: 4rem;">
-                    <%= fa_icon 'leaf' %> <%= each_commitment.title %> <%= fa_icon 'leaf' %>
-                  </h5>
-                  <p class="card-text text-center"> <%= each_commitment.description %> </p>
-                  <p class="card-text text-center size:5">Inscrits : <%= each_commitment.users.count %> </p>
-                  <button class="btn btn-primary text-center mt-3">En savoir plus</button>
-                </div>
-              </a>
-            </div>
-          </div>
+	<hr class="my-4">
 
-        <% end %>
-    <% end %>
-    </div>
-  </div>
+	<div class="container bgverylight border shadow">
+		<% if @commitments.count == 0 %>
+			<div class="list-group">
+				<div class="list-group-item">
+					Il n'y a pas de Mouvement actuellement sur le Lobby...
+				</div>
+			</div>
+		<% else %>
+
+			<div class="row p-3">
+				<% @commitments.each do |each_commitment| %>
+					<div class="col-md-6 p-2">
+						<div class="card border-primary shadow commitement" style="min-height: 200px">
+							<a href="<%= commitment_path(each_commitment.id) %>" style="text-decoration: none">
+								<div class="card-body">
+									<h5 class="card-title text-center" style="height: 4rem;">
+										<%= fa_icon 'leaf', class: 'float-left' %><%= fa_icon 'leaf', class: 'float-right' %><%= each_commitment.title %>
+									</h5>
+									<p class="card-text"> <%= each_commitment.description %> </p>
+									 <div class="container d-flex align-items-center justify-content-between p-0">
+									<p class="card-text">Inscrits : <%= each_commitment.users.count %> </p>
+									<button class="btn btn-primary text-center float-right my-3">En savoir plus</button>
+									 </div>
+								</div>
+							</a>
+						</div>
+					</div>
+
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+
 </div>
