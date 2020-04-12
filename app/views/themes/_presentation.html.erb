@@ -22,9 +22,9 @@
 			<!-- BUTTON TO FOLLOW OR UN-FOLLOW THE THEME -->
 			<% if user_signed_in? %>
 				<% if current_user.commitments.include?(@theme) %>
-					<%= link_to "Quitter", commitment_user_commitment_path(@theme.id, @theme.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
+					<%= link_to "Quitter", theme_user_theme_path(@theme.id, @theme.user_commitments.find_by(user: current_user)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
 				<% else %>
-					<%= link_to "Suivre", commitment_user_commitments_path(@theme.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
+					<%= link_to "Suivre", theme_user_themes_path(@theme.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
 				<% end %>
 			<% else %>
 				<%= link_to "Suivre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
