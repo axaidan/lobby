@@ -1,8 +1,8 @@
 class Theme < ApplicationRecord
 
 	# VALIDATIONS
-	validates :title, presence: true
-	validates :description, presence: true
+	validates :title, presence: true, length: {minimum: 3, maximum: 20}
+	validates :description, presence: true, length: {minimum: 50, maximum: 200}
 	validates :sources, presence: true
 
 	# LINK TABLES
