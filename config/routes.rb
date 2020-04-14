@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 								 unlocks: 'ngos/unlocks' }
 	resources :ngos, only: [:index, :show, :edit, :update]
 	devise_for :users, path: 'users',
-		controllers: { sessions: 'users/sessions', registrations: "registrations",
+		controllers: { sessions: 'users/sessions', registrations: "users/registrations",
 								 passwords: 'users/passwords', confirmations: 'users/confirmations',
 								 unlocks: 'users/unlocks' }
 	resources :users, only: [:show, :edit, :update]
