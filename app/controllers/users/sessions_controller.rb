@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class Ngos::SessionsController < Devise::SessionsController
-
+class Users::SessionsController < Devise::SessionsController
 	include AccessibleDevise
 	skip_before_action :check_user, only: :destroy
   # before_action :configure_sign_in_params, only: [:create]

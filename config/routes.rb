@@ -16,7 +16,10 @@ Rails.application.routes.draw do
 								 passwords: 'ngos/passwords', confirmations: 'ngos/confirmations',
 								 unlocks: 'ngos/unlocks' }
 	resources :ngos, only: [:index, :show, :edit, :update]
-	devise_for :users, path: 'users', controllers: { registrations: "registrations" }
+	devise_for :users, path: 'users',
+		controllers: { sessions: 'users/sessions', registrations: "registrations",
+								 passwords: 'users/passwords', confirmations: 'users/confirmations',
+								 unlocks: 'users/unlocks' }
 	resources :users, only: [:show, :edit, :update]
 
 	scope "admin", module: "admin", as: "admin" do
