@@ -1,40 +1,44 @@
 Rails.application.routes.draw do
-  root to: "static#home"
 
-  resources :commitments, only: [:show, :index] do
-    resources :user_commitments, only: [:create, :destroy]
-  end
+	# STATIC
+	root to: "static#home"
+	get "/home" => "static#home"
+	get "/statistics" => "static#statistics"
+	get "/about" => "static#about"
+	get "/donate" => "static#donate"
+	get "/rgpd" => "static#rgpd"
+	resources :contact, only: [:new, :create]
+	resources :charges, only: [:new, :create]
 
-  scope "admin", module: "admin", as: "admin" do
-    resources :commitments
-    resources :users
-    resources :themes
-  end
+	# USERS
+	devise_for :ngos, path: 'ngos',
+		controllers: { sessions: 'ngos/sessions', registrations: 'ngos/registrations',
+								 passwords: 'ngos/passwords', confirmations: 'ngos/confirmations',
+								 unlocks: 'ngos/unlocks' }
+	resources :ngos, only: [:index, :show, :edit, :update]
+	devise_for :users, path: 'users', controllers: { registrations: "registrations" }
+	resources :users, only: [:show, :edit, :update]
 
-  resources :forums, only: [:index, :show] do
-    resources :posts do
-      resources :replies, only: [:new, :create, :edit, :update, :destroy]
-    end
-  end
+	scope "admin", module: "admin", as: "admin" do
+		resources :commitments
+		resources :users
+		resources :themes
+	end
 
-  devise_for :users, controllers: { registrations: "registrations" }
-  resources :users, only: [:show, :edit, :update]
+	# MODELS
+	resources :commitments, only: [:show, :index] do
+		resources :user_commitments, only: [:create, :destroy]
+	end
 
-  resources :themes, only: [:show, :index] do
-    resources :user_themes, only: [:create, :destroy]
-  end
+	resources :themes, only: [:show, :index] do
+		resources :user_themes, only: [:create, :destroy]
+	end
 
-  resources :contact, only: [:new, :create]
+	resources :forums, only: [:index, :show] do
+		resources :posts do
+			resources :replies, only: [:new, :create, :edit, :update, :destroy]
+		end
+	end
 
-  # STATIC ROUTES
-  get "/home" => "static#home"
-  get "/statistics" => "static#statistics"
-  get "/about" => "static#about"
-  get "/donate" => "static#donate"
-  get "/rgpd" => "static#rgpd"
-
-
-  resources :charges, only: [:new, :create]
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -26,12 +26,12 @@ class User < ApplicationRecord
 	# LINK THEMES
 	has_many :user_themes, dependent: :destroy
 	has_many :themes, through: :user_themes
+
 	# CALLBACKS
   after_create :assign_default_username
   after_create :welcome_send
 
 	# METHODS
-
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
   end

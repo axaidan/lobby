@@ -1,0 +1,52 @@
+<div class="container my-5">
+
+  <div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
+    <h2 class="text-white">NGOs</h2>
+    <div class="d-flex justify-content-center align-items-center rounded-circle bg-light p-3 text-primary"><%= fa_icon 'exclamation 3x', class: 'mx-3' %></div>
+  </div>
+
+  <div class="container bgverylight p-3 border shadow">
+    <p>Les <span class="font-weight-bold">NGOs</span> sont des Organisations Non-Gouvernementales oeuvrant pour l'environnement.</p>
+    <p>
+		Les NGOs travaillent sur des <span class="font-weight-bold">Thèmes</span> et peuvent soutenir des <span class="font-weight-bold">Mouvements</span>.
+    </p>
+    <p>
+    Vous pouvez accéder au Profil d'une NGO en cliquant dessus pour en savoir plus.:
+    </p>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="container bgverylight border shadow">
+    <% if @ngos.count == 0 %>
+      <div class="list-group">
+        <div class="list-group-item">
+          Il n'y a pas de NGO actuellement sur le Lobby...
+        </div>
+      </div>
+    <% else %>
+
+      <div class="row p-3">
+        <% @ngos.each do |each_ngo| %>
+          <div class="col-md-6 p-2">
+            <div class="card border-primary shadow commitement">
+              <a href="<%= ngo_path(each_ngo.id) %>" style="text-decoration: none">
+                <div class="card-body">
+                  <h5 class="card-title text-center" style="height: 3rem;">
+                    <%= fa_icon 'leaf', class: 'float-left' %><%= fa_icon 'leaf', class: 'float-right' %><%= each_ngo.email %>
+                  </h5>
+                  <p class="card-text overflow-hidden" style="height: 3rem;"></p>
+                  <p class="card-text"></p>
+                  <button class="btn btn-primary text-center float-right my-3">En savoir plus</button>
+                   </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
