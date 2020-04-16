@@ -5,10 +5,12 @@
   </head>
   <body>
     <h1>Bienvenue sur Le Lobby !</h1>
-    <p>Tu t'es inscrit sur le-lobby.herokuapp.com en utilisant l'e-mail suivant : <%= @user.email %>.</p>
+		<p>Tu t'es inscrit sur <%= link_to 'https://le-lobby.herokuapp.com', @url %> en utilisant l'e-mail suivant : <%= @user.email %>.</p>
     <br/>
-    <p>Le Lobby est un projet engagé, militant, social et technique qui souhaite apporter sa pierre à la résolution des problématiques contemporaines les plus importantes. 
-      Merci de rejoindre notre projet qui est d'allier progression technique et engagement militant, nous t'invitons dès maintenant à mettre en avant tes motivations! 
+		<p>Nous vous invitons à compléter votre profil au plus vite pour pouvoir être intégré dans nos données avec un maximum de pertinence.</p>
+		<p>Lors de cette étape, il vous est demandé de spécifier si vous souhaitez être affiché dans ses données par votre véritable identité (nom et prénom) ou par un nom d'utilisateur.</p>
+		<p>Pour le moment, votre identité ne sera pas affichée et un nom d'utilisateur vous a été attribué par défaut.</p>
+		<p>Le Lobby est un projet engagé, militant, social et technique qui souhaite apporter sa pierre à la résolution de la problématique contemporaine la plus importante : la transition écologique.<br/>
       Nous souhaitons également faire évoluer Le Lobby, n'hésite pas à nous faire des retours. </p>
     <br/>
     <p>Merci pour ton inscription et à bientot !</p>

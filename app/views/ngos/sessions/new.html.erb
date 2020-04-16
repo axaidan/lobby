@@ -3,25 +3,24 @@
 	<div class=" align-self-center">
 
 		<div class="container bg-primary p-3 shadow mb-4">
-			<h2 class='text-white text-center'>Connexion</h2>
+			<h2 class="text-white text-center">Connexion - ONG</h2>
 		</div>
 
 		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
 			<div class="field">
-				<label class="mb-0">Email</label><br/>
+				<%= f.label :email, class: "mb-0" %><br/>
 				<%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control border' %>
 			</div>
 
 			<div class="field">
-				<label class="mb-0 mt-3">Mot de passe</label><br/>
+				<%= f.label :password, "Mot de passe", class: "mb-0 mt-3" %><br/>
 				<%= f.password_field :password, autocomplete: "current-password", class: 'form-control border' %>
 			</div>
 
 			<% if devise_mapping.rememberable? %>
 				<div class="field">
 					<%= f.check_box :remember_me %>
-					<label class="mb-0 mt-3">Se souvenir de moi</label>
+					<%= f.label :remember_me, "Se souvenir de moi", class: "mb-0 mt-3" %>
 				</div>
 			<% end %>
 
@@ -30,16 +29,17 @@
 			</div>
 		<% end %>
 
-		<hr class="my-4" style="width: 75%;">
+			    <hr class="my-4" style="width: 75%;">
 
-		<div class="text-center">
+    <div class="text-center">
 
-			<small>
-			<%= link_to "Vous êtes une association ?", new_ngo_session_path, class: "text-center text-muted" %>
-			<br/>
+      <small>
+				<%= link_to "Vous n'êtes pas une association ?", new_user_session_path, class: "text-center text-muted" %>
+				<br/>
 			</small>
 
-		<%= render "devise/shared/links" %>
+		<%= render "ngos/shared/links" %>
+
 		</div>
 
 	</div>

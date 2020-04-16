@@ -126,15 +126,15 @@ p {
 	width: 100%;
 	min-height: 600px;
 	border: none!important;
-	background-image: url("https://zupimages.net/up/20/13/8do8.jpg");
-	background-position: center;
+	background-image: url("https://zupimages.net/up/20/16/fqyt.jpg");
+	background-position: bottom center;
 	background-size: cover;
+	/*
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
+	*/
 	position: relative;
-	background-size: cover;
-	background-position: center top;
 	overflow: hidden;
 	padding: 0px!important;
 	margin-bottom: 0px!important;
