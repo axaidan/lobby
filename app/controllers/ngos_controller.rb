@@ -21,7 +21,6 @@ class NgosController < ApplicationController
 			flash[:error] = @ngo.errors.full_messages.to_sentence
 			redirect_to edit_ngo_path(current_ngo)
 		end
-
 	end
 
 	private
