@@ -1,34 +1,46 @@
 <div class='container d-flex my-5 justify-content-center'>
-  <div class=" align-self-center">
-    <h2 class='text-center'>Se connecter</h2>
-    <br>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <label>Email</label><br/>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control border' %>
-      </div>
-      <br>
 
-      <div class="field">
-        <label>Mot de passe</label><br/>
-        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control border' %>
-      </div>
-      <br>
+	<div class=" align-self-center">
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <label>Se souvenir de moi</label>
-        </div>
-      <% end %>
-      <br>
+		<div class="container bg-primary p-3 shadow mb-4">
+			<h2 class='text-white text-center'>Connexion</h2>
+		</div>
 
-      <div class="actions">
-        <%= f.submit "Se connecter", class: 'btn btn-success btn-md btn-block' %>
-      </div>
-    <% end %>
-    <br>
+		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-    <%= render "devise/shared/links" %>
-  </div>
+			<div class="field">
+				<label class="mb-0">Email</label><br/>
+				<%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control border' %>
+			</div>
+
+			<div class="field">
+				<label class="mb-0 mt-3">Mot de passe</label><br/>
+				<%= f.password_field :password, autocomplete: "current-password", class: 'form-control border' %>
+			</div>
+
+			<% if devise_mapping.rememberable? %>
+				<div class="field">
+					<%= f.check_box :remember_me %>
+					<label class="mb-0 mt-3">Se souvenir de moi</label>
+				</div>
+			<% end %>
+
+			<div class="actions">
+				<%= f.submit "Se connecter", class: 'btn btn-success btn-md btn-block my-4' %>
+			</div>
+		<% end %>
+
+		<hr class="my-4" style="width: 75%;">
+
+		<div class="text-center">
+
+			<small>
+			<%= link_to "Vous êtes une association ?", new_ngo_session_path, class: "text-center text-muted" %>
+			<br/>
+			</small>
+
+		<%= render "devise/shared/links" %>
+		</div>
+
+	</div>
 </div>
