@@ -1,8 +1,13 @@
-<div class="container my-4 d-flex">
-  <div class=" align-self-center">
-    <h1>Editer mon profil</h1>
-    <%= form_for @user do |f| %>
-      <%= render 'edit_form', f: f %>
-    <% end %>
-  </div>
+<div class="container my-5">
+
+	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
+		<h2 class="text-white">Édition profil utilisateur</h2>
+	</div>
+
+	<hr class="my-4" style="width: 75%;">
+
+	<%= form_for @user do |f| %>
+		<%= render 'edit_form', f: f %>
+	<% end %>
+
 </div>

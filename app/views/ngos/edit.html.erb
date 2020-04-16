@@ -1,0 +1,27 @@
+<div class="container my-5">
+
+	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
+		<h2 class="text-white">Édition profil NGO</h2>
+	</div>
+
+	<hr class="my-4" style="width: 75%;">
+
+	<%= form_for @ngo do |f| %>
+		<p><label>e-mail</label>
+		<%= f.text_field :email, class: "form-control border" %></p>
+		<p><label>nom</label>
+		<%= f.text_field :name, class: "form-control border" %></p>
+		<p><label>lien</label>
+		<%= f.text_field :url, class: "form-control border" %></p>
+		<p><label>description</label>
+		<%= f.text_field :description, class: "form-control border" %></p>
+		<button type='submit' class='btn btn-success'>Éditer le profil</button>
+	<% end %>
+
+	<% if false %>
+		<%= form_for @user do |f| %>
+			<%= render 'edit_form', f: f %>
+		<% end %>
+	<% end %>
+
+</div>
