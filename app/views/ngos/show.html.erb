@@ -1,8 +1,11 @@
 <div class="container my-5">
+
 	<p> Email :
 	<%= @ngo.email %>
 	</p>
 
-	<%= link_to "Paramètres de connexion", edit_ngo_registration_path, class: 'btn btn-block btn-outline-secondary' %>
+	<% if ngo_signed_in? && @ngo == current_ngo %>
+		<%= link_to "Paramètres de connexion", edit_ngo_registration_path, class: 'btn btn-block btn-outline-secondary' %>
+	<% end %>
 
 </div>

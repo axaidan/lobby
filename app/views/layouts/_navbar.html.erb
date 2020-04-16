@@ -21,17 +21,17 @@
 				</a>
 			</li>
 			<li class="nav-item active">
+				<%= link_to 'NGOs', ngos_path, class: 'nav-link text-muted' %>
+			</li>
+			<li class="nav-item active">
 				<a class="nav-link text-muted" href="<%= forums_path %>">
 					Forums<span class="sr-only">(current)</span>
 				</a>
 			</li>
-			<li class="nav-item active">
-				<%= link_to 'NGOs', ngos_path, class: 'nav-link text-muted' %>
-
-			</li>
 		</ul>
 
 		<ul class="navbar-nav ml-3 mr-md-0">
+
 			<!-- ADMIN BUTTONS DROPDOWN -->
 			<% if is_admin? %>
 				<li class="dropdown nav-item active navbar-nav">
@@ -52,23 +52,23 @@
 				<li class="nav-item pt-1 mb-1">
 					<%= link_to "Déconnexion", destroy_user_session_path, class: "btn btn-primarynav", method: 'delete' %>
 				</li>
-
 			<% elsif ngo_signed_in? %>
 				<!-- NGO BUTTONS -->
 				<%= link_to "Profil", ngo_path(current_ngo.id), class: 'nav-link text-white' %>
 				</li>
 				<li class="nav-item pt-1 mb-1">
 					<%= link_to "Déconnexion", destroy_ngo_session_path, class: "btn btn-primarynav", method: 'delete' %>
+				</li>
+			<% else %>
+				<!-- SIGN-UP & SIGN-IN BUTTONS -->
+				<li class="nav-item pt-1 mb-1">
+					<%= link_to "Inscription", new_user_registration_path, class: "btn btn-primary" %>
+				</li>
+				<li class="nav-item pt-1 mb-1">
+					<%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-primary" %>
+				</li>
+			<% end %>
 
-				<% else %>
-
-					<li class="nav-item pt-1 mb-1">
-						<%= link_to "Inscription", new_user_registration_path, class: "btn btn-primary" %>
-					</li>
-					<li class="nav-item pt-1 mb-1">
-						<%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-primary" %>
-					</li>
-				<% end %>
 		</ul>
 	</div>
 </nav>
