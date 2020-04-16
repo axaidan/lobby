@@ -17,19 +17,17 @@
     <div class="row justify-content-around align-items-around">
       <div class="col-md-5 border bg-light p-4">
         <h4 class="mb-3 ">Le concept</h4>
-        <p><a href="<%= about_path %>">Le Lobby</a> est un réseau militant visant à fédérer particuliers, associations
-          et entreprises au travers des Mouvements - ou demarches - qu'ils rejoignent.</p>
+				<p><a href="<%= about_path %>">Le Lobby</a> est un réseau militant visant à fédérer particuliers, associations et scientifiques au travers des Mouvements - ou demarches - auxquels ils adhèrent.
+				</p>
         <br/>
-        <p>Il se donne pour objectif la création d’une plateforme sociale web centralisant l’information, l’action,
-          ainsi que la volonté d’engagement de ces acteurs.</p>
+        <p>Il se donne pour objectif la création d’une plateforme sociale web centralisant l’information, l’action, ainsi que la volonté d’engagement de ces acteurs.</p>
       </div>
       <div class="col-md-2 align-self-center">
         <p class="text-center mt-3"><%= fa_icon "leaf 2x" %></p>
       </div>
       <div class="col-md-5 border bg-light p-4">
         <h4 class="mb-3">Pour participer</h4>
-        <p><%= link_to "Inscrivez-vous", new_user_registration_path, class: "font-weight-bold" %> gratuitement pour
-          profiter d'une plateforme sans publicité centralisant les engagements pris par les acteurs de l'écologie.</p>
+        <p><%= link_to "Inscrivez-vous", new_user_registration_path, class: "font-weight-bold" %> gratuitement pour profiter d'une plateforme sans publicité centralisant les engagements pris par les acteurs de l'écologie.</p>
         <br/>
         <p>Vous avez une suggestion ? Vous souhaitez devenir partenaire
           ?  <%= link_to "Contactez-nous", new_contact_path, class: "font-weight-bold" %>, votre message sera reçu par
@@ -54,8 +52,7 @@
         <p class="text-center font-weight-bold">
           L'information est capitale dans la transition écologique.
           <br/>
-          Le Lobby propose des <strong>Sources</strong>
-          pour chaque Thème et chaque Mouvement que nous mettons en ligne.
+          Le Lobby propose des <strong>Sources</strong> vérifiées pour chaque Thème et chaque Mouvement que nous mettons en ligne.
         </p>
       </div>
 
@@ -65,8 +62,7 @@
         </div>
         <h4 class="text-center mt-2">Lobbying</h4>
         <p class="text-center font-weight-bold">
-          Pour que notre voix soit entendue et que nous ayons un impact,
-          il est necessaire de mener des actions de Lobbying.
+          Pour que notre voix soit entendue et que nous ayons un impact, il est necessaire de mener des actions de Lobbying.
           <br/>
           Cette fonctionnalité sera bientôt mise en place.
         </p>
@@ -79,8 +75,7 @@
           </div>
           <h4 class="text-center mt-2">Forums</h4>
           <p class="text-center font-weight-bold">
-            Pour s'organiser, pour échanger des bons tuyaux, ou juste pour papoter,
-            Le Lobby vous propose des Forums.
+            Pour s'organiser, pour échanger des bons tuyaux, ou juste pour papoter, le Lobby vous propose des Forums.
             <br/>
             Chaque Thème et chaque Mouvement dispose d'ores et déjà d'un Forum dédié.
           </p>
@@ -94,13 +89,12 @@
 
       <div class="col-md-4">
         <a href="<%= commitments_path %>">
-          <div class="mt-2 mx-auto d-flex justify-content-center align-items-center rounded-circle border-0 bg-light icone mb-3">
+          <div class="mx-auto d-flex justify-content-center align-items-center rounded-circle border-0 bg-light icone mb-3">
             <%= fa_icon "exclamation 5x" %>
           </div>
           <h4 class="text-center mt-2">Mouvements</h4>
           <p class="text-center font-weight-bold">
-            Un Mouvement est une démarche entreprise par un Lobbyiste.
-            Rejoignez un Mouvement et décourez qui sont les autres Lobbyistes ayant adopté la même démarche.
+            Un Mouvement est une démarche entreprise par un Lobbyiste. Rejoignez un Mouvement et décourez qui sont les autres Lobbyistes ayant adopté la même démarche.
             Vous pourrez ainsi participer au Forum qui lui est dédié.
           </p>
         </a>
@@ -113,9 +107,7 @@
           </div>
           <h4 class="text-center mt-3">Thèmes</h4>
           <p class="text-center font-weight-bold">
-            Alimentation, Mobilité ou encore Animaux : nos Mouvements sont regroupés par Thème.
-            Les Thèmes disposent également de Sources, et bientôt d'un Forum dédié.
-            Vous pouvez d'ores et déjà suivre un Thème.
+            Alimentation, Mobilité ou encore Animaux : nos Mouvements sont regroupés par Thème. Les Thèmes disposent également de Sources, et bientôt d'un Forum dédié. Vous pouvez d'ores et déjà suivre un Thème.
           </p>
         </a>
       </div>
@@ -134,13 +126,12 @@
         <h3 class="text-center mb-3">Évolution du nombre<br/>de Lobbyistes</h3>
         <p class="text-center font-weight-bold">
           Retrouvez l'évolution du nombre de Lobbyistes inscrits sur le site depuis sa création !
-
         </p>
       </div>
       <div class="col-md-8 pl-4">
         <div class="card ">
           <div class="card-header bgstathome">
-            <h3 class="card-title text-center text-dark">Total des utilisateurs du Lobby dans le temps</h3>
+            <h3 class="card-title text-dark">Total des utilisateurs du Lobby dans le temps</h3>
           </div>
           <div class="card-body border-primary">
             <%= line_chart(User.count_by_day, legend: false) %>

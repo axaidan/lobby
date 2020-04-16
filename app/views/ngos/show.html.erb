@@ -1,13 +1,15 @@
 <div class="container my-5">
 
 	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
-		<h2 class="text-white">Profil NGO</h2>
+		<% if @ngo.name != nil %>
+			<h2 class="text-white"><%= @ngo.name %></h2>
+			<h2 class="text-white">Profil NGO n°<%= @ngo.id %></h2>
 	</div>
 
 	<hr class="my-4" style="width: 75%;">
 
 	<div class="container bg-primary pl-3 p-2 shadow">
-		<h4 class="text-white my-auto">Vos informations</h4>
+		<h4 class="text-white my-auto">Informations</h4>
 	</div>
 
 	<div class="p-0 shadow">
@@ -15,17 +17,17 @@
 			<tbody>
 
 				<tr class="">
-					<td class="text-muted">e-mail &#8239:</td>
+					<td class="text-muted">e-mail</td>
 					<td class="text-center"><%= @ngo.email %></td>
 				</tr>
 
 				<tr class="">
-					<td class="text-muted">nom &#8239:</td>
+					<td class="text-muted">nom</td>
 					<td class="text-center"><%= @ngo.name %></td>
 				</tr>
 
 				<tr class="">
-					<td class="text-muted">lien &#8239:</td>
+					<td class="text-muted">lien</td>
 					<td class="text-center"><%= @ngo.url %></td>
 				</tr>
 
