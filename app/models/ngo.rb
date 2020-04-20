@@ -14,6 +14,7 @@ class Ngo < ApplicationRecord
 
 	def welcome_send
 		NgoMailer.welcome_email(self).deliver_now
+		AdminMailer.new_ngo_mail(self).deliver_now
 	end
 
 	def assign_default_status

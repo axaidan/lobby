@@ -1,6 +1,5 @@
 class ContactMailer < ApplicationMailer
 
-
   def contact_email(email,subject,content)
     @email = email
     @subject = subject
