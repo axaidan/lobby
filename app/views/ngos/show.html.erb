@@ -1,11 +1,63 @@
 <div class="container my-5">
 
-	<p> Email :
-	<%= @ngo.email %>
-	</p>
+	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
+		<% if @ngo.name != nil %>
+			<h2 class="text-white"><%= @ngo.name %></h2>
+		<% else %>
+			<h2 class="text-white">Profil NGO n°<%= @ngo.id %></h2>
+		<% end %>
+	</div>
+
+	<hr class="my-4" style="width: 75%;">
+
+	<div class="container bg-primary pl-3 p-2 shadow">
+		<h4 class="text-white my-auto">Informations</h4>
+	</div>
+
+	<div class="p-0 shadow">
+		<table class="table table-bordered table-sm">
+			<tbody>
+
+				<tr class="">
+					<td class="text-muted">e-mail</td>
+					<td class="text-center"><%= @ngo.email %></td>
+				</tr>
+
+				<tr class="">
+					<td class="text-muted">nom</td>
+					<td class="text-center"><%= @ngo.name %></td>
+				</tr>
+
+				<tr class="">
+					<td class="text-muted">lien</td>
+					<td class="text-center"><%= @ngo.url %></td>
+				</tr>
+
+				<tr class="">
+					<td class="text-muted">description</td>
+					<td class="text-center"><%= @ngo.description %></td>
+				</tr>
+
+				<tr class="">
+					<td class="text-muted">validation</td>
+					<td class="text-center"><%= @ngo.status %></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
 
 	<% if ngo_signed_in? && @ngo == current_ngo %>
-		<%= link_to "Paramètres de connexion", edit_ngo_registration_path, class: 'btn btn-block btn-outline-secondary' %>
+		<div class="">
+			<div class="d-flex justify-content-between">
+				<div class="float-right">
+					<%= link_to 'Modifier votre profil', edit_ngo_path(@ngo), class: 'btn btn-block btn-secondary shadow' %>
+				</div>
+				<div class="float-right">
+					<%= link_to 'Paramètres de connexion', edit_ngo_registration_path, class: 'btn btn-block btn-outline-secondary shadow' %>
+				</div>
+			</div>
+		</div>
 	<% end %>
 
 </div>

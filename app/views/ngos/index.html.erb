@@ -2,7 +2,7 @@
 
 	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
 		<h2 class="text-white">NGOs</h2>
-		<div class="d-flex justify-content-center align-items-center rounded-circle bg-light p-3 text-primary"><%= fa_icon 'exclamation 3x', class: 'mx-3' %></div>
+		<div class="d-flex justify-content-center align-items-center rounded-circle bg-light p-3 text-primary"><%= fa_icon 'users 3x', class: 'mx-1' %></div>
 	</div>
 
 	<div class="container bgverylight p-3 border shadow">
@@ -11,7 +11,7 @@
 		Les NGOs travaillent sur des <span class="font-weight-bold">Thèmes</span> et peuvent soutenir des <span class="font-weight-bold">Mouvements</span>.
 		</p>
 		<p>
-		Vous pouvez accéder au Profil d'une NGO en cliquant dessus pour en savoir plus.:
+		Vous pouvez accéder au Profil d'une NGO en cliquant dessus pour en savoir plus.
 		</p>
 	</div>
 
@@ -19,19 +19,17 @@
 
 	<div class="container bgverylight border shadow">
 
-		<% if @ngos.count == 0 %>
+		<% if @ngos.where(status: true).count == 0 %>
 
-			<div class="list-group">
-				<div class="list-group-item">
-					Il n'y a pas de NGO actuellement sur le Lobby...
-				</div>
+			<div class="p-3">
+				Il n'y a pas de NGO actuellement sur le Lobby...
 			</div>
 
 		<% else %>
 
 			<div class="row p-3">
 
-				<% @ngos.each do |each_ngo| %>
+				<% @ngos.where(status: true).each do |each_ngo| %>
 
 					<div class="col-md-6 p-2">
 						<div class="card border-primary shadow commitement">
