@@ -1,5 +1,8 @@
 <% flash.each do |type, msg| %>
-  <div class="m-0 alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show" role="alert">
-    <%= msg.split(',').join('<br>').html_safe %>
-  </div>
+	<div class="m-0 alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<div class="container">
+			<%= msg.split(',').join('<br>').html_safe %>
+		</div>
+	</div>
 <% end %>

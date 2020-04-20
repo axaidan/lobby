@@ -6,11 +6,15 @@ class NgosController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def edit
-
+		if !(@ngo.status) 
+			flash[:error] = "<p>Votre profil est en attente de validation par un administrateur.</p>
+<p>Pour plus de sécurité dans la présence des NGOs sur le site nos administrateurs ont pour mission de vérifier votre demande d'inscription.</p>
+<p>Dans le cas où nous ne saurions faire confirmer votre demande d'inscription auprès de l'administration de votre structure nous nous réservons le droit de supprimer votre compte.</p>
+<p>Merci de votre compréhension.</p>"
+		end
 	end
 
 	def update	

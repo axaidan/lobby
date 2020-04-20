@@ -3,7 +3,9 @@
 	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
 		<% if @ngo.name != nil %>
 			<h2 class="text-white"><%= @ngo.name %></h2>
+		<% else %>
 			<h2 class="text-white">Profil NGO n°<%= @ngo.id %></h2>
+		<% end %>
 	</div>
 
 	<hr class="my-4" style="width: 75%;">
@@ -56,6 +58,6 @@
 				</div>
 			</div>
 		</div>
-	<% end%>
+	<% end %>
 
 </div>
