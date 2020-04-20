@@ -22,10 +22,12 @@ Rails.application.routes.draw do
 								 unlocks: 'users/unlocks' }
 	resources :users, only: [:show, :edit, :update]
 
+	# ADMIN
 	scope "admin", module: "admin", as: "admin" do
 		resources :commitments
-		resources :users
 		resources :themes
+		resources :users
+		resources :ngos
 	end
 
 	# MODELS
