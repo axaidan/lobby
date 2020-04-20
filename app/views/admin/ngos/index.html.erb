@@ -32,7 +32,11 @@
 								<% end %>
 								<td>
 									<div class="d-flex justify-content-around align-items-center">
-										<%= link_to 'Editer', edit_admin_ngo_path(each_ngo.id), class: 'btn btn-outline-secondary' %>
+										<% if each_ngo.status == true %>
+											<%= link_to "Invalider", admin_change_status_path(each_ngo), method: :put, class: "btn btn-secondary" %>
+										<% else %>
+											<%= link_to "Valider", admin_change_status_path(each_ngo), method: :put, class: "btn btn-primary" %>
+										<% end %>
 										<%= link_to 'Supprimer', admin_ngo_path(each_ngo.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %>
 									</div>
 								</td>

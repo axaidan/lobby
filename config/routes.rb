@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 		resources :themes
 		resources :users
 		resources :ngos
+		put '/admin/ngos/:id/validate' => 'ngos#change_status', :as => 'change_status'
 	end
 
 	# MODELS

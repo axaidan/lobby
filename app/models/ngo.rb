@@ -6,6 +6,7 @@ class Ngo < ApplicationRecord
 
 	# CALLBACKS
 	after_create :welcome_send
+	after_create :assign_default_status
 
 	# METHODS
 
@@ -13,6 +14,11 @@ class Ngo < ApplicationRecord
 
 	def welcome_send
 		NgoMailer.welcome_email(self).deliver_now
+	end
+
+	def assign_default_status
+		self.status = false
+		self.save
 	end
 
 end
