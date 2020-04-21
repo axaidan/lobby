@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Bonjour de la part de l'équipe du Lobby</h1>
+    <p>Vous avez sollicité une inscription pour l'ONG <%= @ngo.name %> sur le site https://le-lobby.herokuapp.com via l'adresse email <%= @ngo.email %>.</p> 
+		<br/>
+		<p>Nous vous envoyons cet e-mail pour vous informer que votre compte a été supprimé par <%= @admin.username %>, l'un de nos administrateurs.</p>
+		<br/>
+		<p>Plusieurs raisons peuvent expliquer cette décision :</p>
+		<ul>
+			<li>L'équipe des administrateurs n'a pas pu vérifier que votre inscription a bien été sollicitée par l'ONG que vous affirmez représenter. Nous prenons très au sérieux l'authenticité des inscriptions d'ONG. S'il s'agit d'une erreur veuillez nous en excuser s'il vous plait.</li>
+			<li>Votre inscription a été sollicitée il y a trop longtemps, et vous n'avez pas complété votre profil ONG.</li>
+			<li>Nous estimons que l'ONG que vous représentez ne correspond pas aux critères pour être présente sur notre site. Nous tenons à ce que les ONGs présentes sur notre site agissent pour le développement durable et la transition écologique via des méthodes non-violentes. Si vous souhaitez contester cette décision, vous pouvez répondre à cet e-mail.</li>
+			<li>Vos actions sur le site, quelle que soit la section, ne respecte pas notre charte.</li>
+		</ul>
+		<br/>
+		<p>Vous pouvez nous contacter pour plus de plus amples informations quant à cette décision en répondant à cet e-mail, nous essaierons de vous répondre dans les plus brefs délais.</p>
+		<p>Nous sommes navrés que votre inscription n'ait pu être menée à son terme.</p>
+		<br/>
+		<p>L'équipe des administrateurs du Lobby</p>
+	</body>
+</html>

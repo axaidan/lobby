@@ -8,28 +8,31 @@ module Admin
 		end
 
 		def edit
-
 		end
 
 		def update
-
 		end
-		
+
 		def destroy 
 			@ngo.destroy
-		end
-		
-		def change_status
-			if !(@ngo.status)
-				@ngo.status = true 
-				@ngo.save
-			else
-				@ngo.status = false
-				@ngo.save
-			end
+			@admin = current_user
+			NgoMailer.refused_registration(@ngo, @admin).deliver_now
 			redirect_to admin_ngos_path
 		end
-		
+
+		def change_status
+			@admin = current_user
+			if !(@ngo.status)
+				@ngo.status = true 
+				NgoMailer.valid_status_email(@ngo, @admin).deliver_now
+			else
+				@ngo.status = false
+				NgoMailer.non_valid_status_email(@ngo, @admin).deliver_now
+			end
+			@ngo.save
+			redirect_to admin_ngos_path
+		end
+
 		private
 
 		def find_ngo
