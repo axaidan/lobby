@@ -15,6 +15,9 @@ class Theme < ApplicationRecord
 	# LINK SOURCES
 	has_many :sources, as: :sourceable, dependent: :destroy
 	accepts_nested_attributes_for :sources, allow_destroy: true, reject_if: proc { |s_attr| s_attr[:url].blank? }
+	# LINK NGOS
+	has_many :ngo_themes, dependent: :destroy
+	has_many :ngos, through: :ngo_themes
 
 	# METHODS
 

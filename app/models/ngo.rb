@@ -8,6 +8,11 @@ class Ngo < ApplicationRecord
 	after_create :welcome_send
 	after_create :assign_default_status
 
+	# LINK TALES
+	# LINK THEMES
+	has_many :ngo_themes, dependent: :destroy
+	has_many :themes, through: :ngo_themes
+
 	# METHODS
 
 	private
