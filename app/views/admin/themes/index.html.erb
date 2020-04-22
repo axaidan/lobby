@@ -4,20 +4,22 @@
 		<h2 class="text-white">Thèmes</h2>
 	</div>
 
-	<%= link_to 'Créer un Thème', new_admin_theme_path, class: 'btn btn-primary ' %>
+	<%= link_to 'Créer un Thème', new_admin_theme_path, class: 'btn btn-primary shadow' %>
+
 	<div class="list-group">
 		<% if @themes.count == 0 %>
-			<div class="list-group-item mt-4">
+			 <div class="list-group-item mt-4">
 				Il n'y a pas de Thème sur le Lobby...
 			</div>
 		<% else %>
-			<div class="table-responsive mt-4">
-				<table class="table table-striped">
+			<div class="table-responsive mt-4 shadow">
+				<table class="table table-striped table-sm table-bordered mb-0">
 					<thead>
-						<tr>
+						<tr class="text-center">
 							<th>ID</th>
 							<th>TITRE</th>
 							<th>UTILISATEURS</th>
+							<th>ACITONS</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -26,8 +28,12 @@
 								<td><%= each_theme.id %></td>
 								<td><%= each_theme.title %></td>
 								<td><%= each_theme.users.count %></td>
-								<td><%= link_to 'Editer', edit_admin_theme_path(each_theme.id), class: 'btn btn-outline-secondary' %></td>
-								<td><%= link_to 'Supprimer', admin_theme_path(each_theme.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %></td>
+								<td>
+									<div class="d-flex justify-content-around align-items-center">
+									<%= link_to 'Editer', edit_admin_theme_path(each_theme.id), class: 'btn btn-outline-secondary' %>
+									<%= link_to 'Supprimer', admin_theme_path(each_theme.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %>
+									</div>
+								</td>
 							</tr>
 						<% end %>
 					</tbody>

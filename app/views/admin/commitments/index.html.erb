@@ -4,20 +4,21 @@
 		<h2 class="text-white">Mouvements</h2>
 	</div>
 
-	<%= link_to 'Créer un Mouvement', new_admin_commitment_path, class: 'btn btn-primary' %>
+	<%= link_to 'Créer un Mouvement', new_admin_commitment_path, class: 'btn btn-primary shadow' %>
 	<div class="list-group">
 		<% if @commitments.count == 0 %>
 			<div class="list-group-item mt-4">
-				Il n'y a pas de Commitment sur le Lobby...
+				Il n'y a pas de Mouvement sur le Lobby...
 			</div>
 		<% else %>
-			<div class="table-responsive mt-4">
-				<table class="table table-striped">
+			<div class="table-responsive mt-4 shadow">
+				<table class="table table-striped table-sm table-bordered mb-0">
 					<thead>
-						<tr>
+						<tr class="text-center">
 							<th>ID</th>
 							<th>TITRE</th>
 							<th>UTILISATEURS</th>
+							<th>ACTIONS</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -26,8 +27,12 @@
 								<td><%= each_commitment.id %></td>
 								<td><%= each_commitment.title %></td>
 								<td><%= each_commitment.users.count %></td>
-								<td><%= link_to 'Editer', edit_admin_commitment_path(each_commitment.id), class: 'btn btn-outline-secondary' %></td>
-								<td><%= link_to 'Supprimer', admin_commitment_path(each_commitment.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %></td>
+								<td>
+									<div class="container d-flex justify-content-around align-items-center">
+									<%= link_to 'Editer', edit_admin_commitment_path(each_commitment.id), class: 'btn btn-outline-secondary' %>
+									<%= link_to 'Supprimer', admin_commitment_path(each_commitment.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %>
+									</div>
+								</td>
 							</tr>
 						<% end %>
 					</tbody>

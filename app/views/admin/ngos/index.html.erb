@@ -1,0 +1,50 @@
+<div class="container my-5">
+
+	<div class="containe bg-primary p-3 shadow d-flex justify-content-between align-items-center mb-3">
+		<h2 class="text-white">NGOs</h2>
+	</div>
+
+	<div class="list-group mt-4">
+		<% if @ngos.count == 0 %>
+			<div class="list-group-item">
+				Il n'y a pas d'Utilisateurs sur le Lobby...
+			</div>
+		<% else %>
+			<div class="table-responsive mt-4 shadow">
+				<table class="table table-striped table-sm table-bordered mb-0">
+					<thead>
+						<tr class="text-center">
+							<th>ID</th>
+							<th>NOM</th>
+							<th>EMAIL</th>
+							<th>STATUT</th>
+							<th>ACTIONS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @ngos.each do |each_ngo| %>
+							<tr id='<%= each_ngo.id %>'>
+								<%= link_to({ controller: 'ngos', action: 'show', id: each_ngo.id })do %>
+									<td><%= each_ngo.id %></td>
+									<td><%= each_ngo.name %></td>
+									<td><%= each_ngo.email %></td>
+									<td><%= each_ngo.status %></td>
+								<% end %>
+								<td>
+									<div class="d-flex justify-content-around align-items-center">
+										<% if each_ngo.status == true %>
+											<%= link_to "Invalider", admin_change_status_path(each_ngo), method: :put, class: "btn btn-secondary" %>
+										<% else %>
+											<%= link_to "Valider", admin_change_status_path(each_ngo), method: :put, class: "btn btn-primary" %>
+										<% end %>
+										<%= link_to 'Supprimer', admin_ngo_path(each_ngo.id), method: 'delete', data: {confirm: 'Êtes-vous sûr ?'}, remote: true, class: 'btn btn-secondary' %>
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		<% end %>
+	</div>
+</div>
