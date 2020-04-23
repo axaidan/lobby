@@ -1,4 +1,5 @@
 class NgosController < ApplicationController
+
 	before_action :find_ngo, only: [:show, :edit, :update]
 
 	def index
@@ -9,6 +10,10 @@ class NgosController < ApplicationController
 	end
 
 	def edit
+		@themes = Theme.all
+		if (@ngo.themes.count == 0)
+			@ngo.ngo_themes.build
+		end
 		if !(@ngo.status) 
 			flash[:error] = "<p>Votre profil est en attente de validation par un administrateur.</p>
 <p>Pour plus de sécurité dans la présence des NGOs sur le site nos administrateurs ont pour mission de vérifier votre demande d'inscription.</p>
@@ -34,7 +39,7 @@ class NgosController < ApplicationController
 	end
 
 	def ngo_params
-		params.require(:ngo).permit(:email, :name, :url, :description)
+		params.require(:ngo).permit(:email, :name, :url, :description, theme_ids:[], theme_attributes: [:id])
 	end
 
 end
