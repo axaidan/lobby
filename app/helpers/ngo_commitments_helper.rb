@@ -1,0 +1,2 @@
+module NgoCommitmentsHelper
+end

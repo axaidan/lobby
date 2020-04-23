@@ -13,6 +13,9 @@ class Commitment < ApplicationRecord
 	# LINK USERS
 	has_many :user_commitments, dependent: :destroy
 	has_many :users, through: :user_commitments
+	# LINK NGOS
+	has_many :ngo_commitments, dependent: :destroy
+	has_many :ngos, through: :ngo_commitments
 	# LINK THEMES
 	has_many :commitment_themes, dependent: :destroy
 	has_many :themes, through: :commitment_themes

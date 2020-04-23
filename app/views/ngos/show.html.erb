@@ -47,7 +47,7 @@
 
 				<tr class="">
 					<td class="text-muted">thèmes</td>
-					<td class="text-center"><%= @ngo.themes.join(', ') %></td>
+					<td class="text-center"><%= @ngo.themes.map{|theme| theme.title}.join(', ') %></td>
 				</tr>
 
 			</tbody>
@@ -66,5 +66,9 @@
 			</div>
 		</div>
 	<% end %>
+
+	<hr class="my-4">
+
+	<%= render "commitments" %>
 
 </div>

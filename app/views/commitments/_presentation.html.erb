@@ -35,6 +35,16 @@
 				<% else %>
 					<%= link_to "Rejoindre", commitment_user_commitments_path(@commitment.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
 				<% end %>
+			<% elsif ngo_signed_in? %>
+				<% if current_ngo.commitments.include?(@commitment) %>
+					<%= link_to "Quitter", commitment_ngo_commitment_path(@commitment.id, @commitment.ngo_commitments.find_by(ngo: current_ngo)), method: 'delete', class: 'btn btn-outline-secondary btnoutlinelink text-wrap' %>
+				<% elsif current_ngo.status == true %>
+					<%= link_to "Soutenir", commitment_ngo_commitments_path(@commitment.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
+				<% else %>
+					<div class="container-fluid bg-secondary text-center">
+						Inscription non-validée
+					</div>
+				<% end %>
 			<% else %>
 				<%= link_to "Rejoindre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
 			<% end %>

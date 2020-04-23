@@ -1,0 +1,34 @@
+<div class="card shadow">
+
+  <div class="card-header">
+    <h3>ONGs</h3>
+  </div>
+
+  <div class="card-body bgverylight p-0">
+
+    <table class="table table-bordered table-sm m-0">
+      <% if @theme.ngos.count == 0 %>
+        <thead>
+          <tr><td>Il n'y a pas d'ONG travaillant sur ce Thème pour le moment</td></tr>
+        </thead>
+      <% else %>
+        <thead>
+          <tr>
+            <th style="width: 80%;" scope="col">ONG</th>
+            <th style="width: 20%;" scope="col">Mouvements soutenus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @theme.ngos.where(status: true).each do |each_ngo| %>
+            <tr>
+              <td class="py-1"><%= each_ngo.name %></td>
+              <td class="py-1"><%= each_ngo.commitments.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% end %>
+    </table>
+
+  </div>
+
+</div>

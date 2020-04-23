@@ -26,6 +26,7 @@
 				<% else %>
 					<%= link_to "Suivre", theme_user_themes_path(@theme.id), method: 'post', class: "btn btn-outline-primary btnlinkoutline text-wrap" %>
 				<% end %>
+			<% elsif ngo_signed_in? %>
 			<% else %>
 				<%= link_to "Suivre", user_session_path, method: 'get', class: "btn btn-block btn-outline-primary btnlinkoutline text-wrap" %>
 			<% end %>

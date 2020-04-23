@@ -13,9 +13,11 @@ class Ngo < ApplicationRecord
 	has_many :ngo_themes, dependent: :destroy
 	has_many :themes, through: :ngo_themes
 	accepts_nested_attributes_for :themes
+	# LINK COMMITMENTS
+	has_many :ngo_commitments, dependent: :destroy
+	has_many :commitments, through: :ngo_commitments
 
 	# METHODS
-
 	private
 
 	def welcome_send
