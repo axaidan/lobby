@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 	# MODELS
 	resources :commitments, only: [:show, :index] do
 		resources :user_commitments, only: [:create, :destroy]
+		resources :ngo_commitments, only: [:create, :destroy]
 	end
 
 	resources :themes, only: [:show, :index] do

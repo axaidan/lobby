@@ -1,0 +1,36 @@
+<div class="card shadow">
+
+	<div class="card-header">
+		<h3>ONGs</h3>
+	</div>
+
+	<div class="card-body bgverylight p-0">
+
+		<table class="table table-bordered table-sm m-0">
+			<% if @commitment.ngos.count == 0 %>
+				<thead>
+					<tr><td>Il n'y a pas d'ONG soutenant ce Mouvement pour le moment</td></tr>
+				</thead>
+			<% else %>
+				<thead>
+					<tr class="align-items-center text-center">
+						<th style="width: 80%;" scope="col">ONG</th>
+						<th style="width: 20%;" scope="col">Mouvements soutenus</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @commitment.ngos.where(status: true).each do |each_ngo| %>
+						<%= link_to ngo_path(each_ngo.id) do %>
+							<tr>
+								<td class="py-1"><%= link_to each_ngo.name, ngo_path(each_ngo.id) %></td>
+								<td class="py-1"><%= each_ngo.commitments.count %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			<% end %>
+		</table>
+
+	</div>
+
+</div>

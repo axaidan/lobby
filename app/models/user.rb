@@ -4,21 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-	# VALIDATIONS
-  validates :username, 
-  uniqueness: { message: ": Ce nom d'utilisateur existe déjà" }
+	# CALLBACKS
+  after_create :assign_default_username
+  after_create :welcome_send
 
-  validates :first_name, 
-  length: {minimum: 1, maximum: 20},
-  allow_blank: true 
-
-  validates :last_name, 
-  length: {minimum: 1, maximum: 50},
-  allow_blank: true
-
-  has_many :posts
-  has_many :replies 
-  
   # LINK TABLES
 	#	LINK COMMITMENTS
   has_many :user_commitments, dependent: :destroy
@@ -26,10 +15,19 @@ class User < ApplicationRecord
 	# LINK THEMES
 	has_many :user_themes, dependent: :destroy
 	has_many :themes, through: :user_themes
+	# LINK FORUM
+  has_many :posts
+  has_many :replies 
 
-	# CALLBACKS
-  after_create :assign_default_username
-  after_create :welcome_send
+	# VALIDATIONS
+  validates :username, 
+  uniqueness: { message: ": Ce nom d'utilisateur existe déjà" }
+  validates :first_name, 
+  length: {minimum: 1, maximum: 20},
+  allow_blank: true 
+  validates :last_name, 
+  length: {minimum: 1, maximum: 50},
+  allow_blank: true
 
 	# METHODS
   def welcome_send
