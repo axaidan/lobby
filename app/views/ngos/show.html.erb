@@ -1,7 +1,7 @@
 <div class="container my-5">
 
 	<div class="container bg-primary p-3 shadow d-flex justify-content-between align-items-center">
-		<% if @ngo.name != nil %>
+		<% if @ngo.name != nil && @ngo.name != "" %>
 			<h2 class="text-white"><%= @ngo.name %></h2>
 		<% else %>
 			<h2 class="text-white">Profil NGO n°<%= @ngo.id %></h2>
@@ -18,10 +18,12 @@
 		<table class="table table-bordered table-sm">
 			<tbody>
 
-				<tr class="">
-					<td class="text-muted">e-mail</td>
-					<td class="text-center"><%= @ngo.email %></td>
-				</tr>
+				<% if (ngo_signed_in? && @ngo == current_ngo) || (user_signed_in? && current_user.role == 'admin') %>
+					<tr class="">
+						<td class="text-muted">e-mail</td>
+						<td class="text-center"><%= @ngo.email %></td>
+					</tr>
+				<% end %>
 
 				<tr class="">
 					<td class="text-muted">nom</td>
@@ -40,7 +42,12 @@
 
 				<tr class="">
 					<td class="text-muted">validation</td>
-					<td class="text-center"><%= @ngo.status %></td>
+					<td class="text-center"><%= @ngo.status ? "validé" : "non validé" %></td>
+				</tr>
+
+				<tr class="">
+					<td class="text-muted">thèmes</td>
+					<td class="text-center"><%= @ngo.themes.join(', ') %></td>
 				</tr>
 
 			</tbody>
