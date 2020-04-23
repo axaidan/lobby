@@ -6,16 +6,30 @@
 
 	<hr class="my-4" style="width: 75%;">
 
-	<%= form_for @ngo do |f| %>
-		<p><label>e-mail</label>
-		<%= f.text_field :email, class: "form-control border" %></p>
-		<p><label>nom</label>
-		<%= f.text_field :name, class: "form-control border" %></p>
-		<p><label>lien</label>
-		<%= f.text_field :url, class: "form-control border" %></p>
-		<p><label>description</label>
-		<%= f.text_area :description, class: "form-control border" %></p>
+	<%= form_with(model: @ngo, url: ngo_path, method: 'patch') do |f| %>
+
+		<fieldset class="form-group">
+			<p><label>e-mail</label>
+			<%= f.text_field :email, class: "form-control border" %></p>
+			<p><label>nom</label>
+			<%= f.text_field :name, class: "form-control border" %></p>
+			<p><label>lien</label>
+			<%= f.text_field :url, class: "form-control border" %></p>
+			<p><label>description</label>
+			<%= f.text_area :description, class: "form-control border" %></p>
+
+			<%= f.label "Thèmes" %>
+			<div class="row">
+				<%= f.collection_check_boxes :theme_ids, Theme.all, :id, :title do |cb| %>
+					<div class="col-3">
+						<%= cb.check_box + cb.label %>
+					</div>
+				<% end %>
+			</div>
+		</fieldset>
+
 		<button type='submit' class='btn btn-success'>Éditer le profil</button>
+
 	<% end %>
 
 </div>

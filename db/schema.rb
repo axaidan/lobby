@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_122224) do
+ActiveRecord::Schema.define(version: 2020_04_22_121130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2020_04_16_122224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_forums_on_commitment_id", unique: true
+  end
+
+  create_table "ngo_themes", force: :cascade do |t|
+    t.bigint "ngo_id"
+    t.bigint "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ngo_id"], name: "index_ngo_themes_on_ngo_id"
+    t.index ["theme_id"], name: "index_ngo_themes_on_theme_id"
   end
 
   create_table "ngos", force: :cascade do |t|
